@@ -8,6 +8,7 @@ namespace WypozyczalniaFilmow.Models
 {
     public class Actor : Person
     {
-        public virtual ICollection<ActorFilm> ActorFilms { get; set; }
+        //public virtual ICollection<ActorFilm> ActorFilms { get; set; }
+        public virtual ICollection<Film> Films { get; set; }
     }
 }

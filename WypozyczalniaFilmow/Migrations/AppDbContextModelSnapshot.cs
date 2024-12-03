@@ -17,19 +17,19 @@ namespace WypozyczalniaFilmow.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
-            modelBuilder.Entity("WypozyczalniaFilmow.Models.ActorFilm", b =>
+            modelBuilder.Entity("ActorFilm", b =>
                 {
-                    b.Property<int>("FilmId")
+                    b.Property<int>("ActorsId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ActorId")
+                    b.Property<int>("FilmsId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("FilmId", "ActorId");
+                    b.HasKey("ActorsId", "FilmsId");
 
-                    b.HasIndex("ActorId");
+                    b.HasIndex("FilmsId");
 
-                    b.ToTable("ActorFilms");
+                    b.ToTable("ActorFilm", (string)null);
                 });
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Film", b =>
@@ -66,7 +66,7 @@ namespace WypozyczalniaFilmow.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Films");
+                    b.ToTable("Films", (string)null);
                 });
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Person", b =>
@@ -113,7 +113,7 @@ namespace WypozyczalniaFilmow.Migrations
 
                     b.HasIndex("FilmId");
 
-                    b.ToTable("Rents");
+                    b.ToTable("Rents", (string)null);
                 });
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Actor", b =>
@@ -137,23 +137,19 @@ namespace WypozyczalniaFilmow.Migrations
                     b.HasDiscriminator().HasValue(2);
                 });
 
-            modelBuilder.Entity("WypozyczalniaFilmow.Models.ActorFilm", b =>
+            modelBuilder.Entity("ActorFilm", b =>
                 {
-                    b.HasOne("WypozyczalniaFilmow.Models.Actor", "Actor")
-                        .WithMany("ActorFilms")
-                        .HasForeignKey("ActorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("WypozyczalniaFilmow.Models.Film", "Film")
-                        .WithMany("ActorFilms")
-                        .HasForeignKey("FilmId")
+                    b.HasOne("WypozyczalniaFilmow.Models.Actor", null)
+                        .WithMany()
+                        .HasForeignKey("ActorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Actor");
-
-                    b.Navigation("Film");
+                    b.HasOne("WypozyczalniaFilmow.Models.Film", null)
+                        .WithMany()
+                        .HasForeignKey("FilmsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Rent", b =>
@@ -177,14 +173,7 @@ namespace WypozyczalniaFilmow.Migrations
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Film", b =>
                 {
-                    b.Navigation("ActorFilms");
-
                     b.Navigation("Rents");
-                });
-
-            modelBuilder.Entity("WypozyczalniaFilmow.Models.Actor", b =>
-                {
-                    b.Navigation("ActorFilms");
                 });
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Client", b =>
