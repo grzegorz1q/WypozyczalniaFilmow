@@ -11,7 +11,7 @@ using WypozyczalniaFilmow.Database;
 namespace WypozyczalniaFilmow.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241203084644_InitialCreate")]
+    [Migration("20241203090117_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -106,9 +106,6 @@ namespace WypozyczalniaFilmow.Migrations
                     b.Property<int>("FilmId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ActorId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
@@ -116,8 +113,6 @@ namespace WypozyczalniaFilmow.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("ClientId", "FilmId");
-
-                    b.HasIndex("ActorId");
 
                     b.HasIndex("FilmId");
 
@@ -166,10 +161,6 @@ namespace WypozyczalniaFilmow.Migrations
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Rent", b =>
                 {
-                    b.HasOne("WypozyczalniaFilmow.Models.Actor", null)
-                        .WithMany("Rents")
-                        .HasForeignKey("ActorId");
-
                     b.HasOne("WypozyczalniaFilmow.Models.Client", "Client")
                         .WithMany("Rents")
                         .HasForeignKey("ClientId")
@@ -197,8 +188,6 @@ namespace WypozyczalniaFilmow.Migrations
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Actor", b =>
                 {
                     b.Navigation("ActorFilms");
-
-                    b.Navigation("Rents");
                 });
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Client", b =>

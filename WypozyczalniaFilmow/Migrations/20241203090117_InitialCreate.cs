@@ -78,8 +78,7 @@ namespace WypozyczalniaFilmow.Migrations
                     ClientId = table.Column<int>(type: "INTEGER", nullable: false),
                     FilmId = table.Column<int>(type: "INTEGER", nullable: false),
                     Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    RentDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ActorId = table.Column<int>(type: "INTEGER", nullable: true)
+                    RentDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,11 +90,6 @@ namespace WypozyczalniaFilmow.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Rents_Persons_ActorId",
-                        column: x => x.ActorId,
-                        principalTable: "Persons",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Rents_Persons_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Persons",
@@ -106,11 +100,6 @@ namespace WypozyczalniaFilmow.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ActorFilms_ActorId",
                 table: "ActorFilms",
-                column: "ActorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rents_ActorId",
-                table: "Rents",
                 column: "ActorId");
 
             migrationBuilder.CreateIndex(
