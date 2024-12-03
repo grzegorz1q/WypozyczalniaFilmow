@@ -20,6 +20,7 @@ namespace WypozyczalniaFilmow.Models
         public string Cover { get; set; }
         public int Count { get; set; }
         public virtual ICollection<Rent> Rents { get; set; }
-        public virtual ICollection<ActorFilm> ActorFilms { get; set; }
+       // public virtual ICollection<ActorFilm> ActorFilms { get; set; }
+        public virtual ICollection<Actor> Actors { get; set; }
     }
 }

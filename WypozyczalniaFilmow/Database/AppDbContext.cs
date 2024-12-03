@@ -16,7 +16,7 @@ namespace WypozyczalniaFilmow.Database
         public virtual DbSet<Film> Films { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Rent> Rents { get; set; }
-        public virtual DbSet<ActorFilm> ActorFilms { get; set; }
+       // public virtual DbSet<ActorFilm> ActorFilms { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
   /*      protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,7 +34,7 @@ namespace WypozyczalniaFilmow.Database
                 .HasValue<Client>((int)Role.Client)
                 .HasValue<Actor>((int)Role.Actor);
 
-            modelBuilder.Entity<ActorFilm>()
+            /*modelBuilder.Entity<ActorFilm>()
                 .HasKey(d => new { d.FilmId, d.ActorId });
 
             modelBuilder.Entity<ActorFilm>()
@@ -46,7 +46,11 @@ namespace WypozyczalniaFilmow.Database
                 .HasOne(a => a.Actor)
                 .WithMany(af => af.ActorFilms)
                 .HasForeignKey(a => a.ActorId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict);*/
+
+            modelBuilder.Entity<Actor>()
+                .HasMany(f => f.Films)
+                .WithMany(a => a.Actors);
 
             modelBuilder.Entity<Rent>()
                 .HasKey(d => new { d.ClientId, d.FilmId });

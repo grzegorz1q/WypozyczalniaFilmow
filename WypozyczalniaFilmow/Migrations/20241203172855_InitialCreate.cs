@@ -48,27 +48,27 @@ namespace WypozyczalniaFilmow.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActorFilms",
+                name: "ActorFilm",
                 columns: table => new
                 {
-                    ActorId = table.Column<int>(type: "INTEGER", nullable: false),
-                    FilmId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ActorsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    FilmsId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActorFilms", x => new { x.FilmId, x.ActorId });
+                    table.PrimaryKey("PK_ActorFilm", x => new { x.ActorsId, x.FilmsId });
                     table.ForeignKey(
-                        name: "FK_ActorFilms_Films_FilmId",
-                        column: x => x.FilmId,
+                        name: "FK_ActorFilm_Films_FilmsId",
+                        column: x => x.FilmsId,
                         principalTable: "Films",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ActorFilms_Persons_ActorId",
-                        column: x => x.ActorId,
+                        name: "FK_ActorFilm_Persons_ActorsId",
+                        column: x => x.ActorsId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,9 +98,9 @@ namespace WypozyczalniaFilmow.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActorFilms_ActorId",
-                table: "ActorFilms",
-                column: "ActorId");
+                name: "IX_ActorFilm_FilmsId",
+                table: "ActorFilm",
+                column: "FilmsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rents_FilmId",
@@ -112,7 +112,7 @@ namespace WypozyczalniaFilmow.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ActorFilms");
+                name: "ActorFilm");
 
             migrationBuilder.DropTable(
                 name: "Rents");
