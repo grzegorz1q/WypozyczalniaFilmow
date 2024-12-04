@@ -11,7 +11,7 @@ using WypozyczalniaFilmow.Database;
 namespace WypozyczalniaFilmow.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241203172855_InitialCreate")]
+    [Migration("20241204171223_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,6 +41,10 @@ namespace WypozyczalniaFilmow.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Count")
                         .HasColumnType("INTEGER");
 
@@ -53,10 +57,6 @@ namespace WypozyczalniaFilmow.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Director")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Genre")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

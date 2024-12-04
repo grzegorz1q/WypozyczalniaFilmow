@@ -29,7 +29,7 @@ namespace WypozyczalniaFilmow.Migrations
 
                     b.HasIndex("FilmsId");
 
-                    b.ToTable("ActorFilm", (string)null);
+                    b.ToTable("ActorFilm");
                 });
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Film", b =>
@@ -37,6 +37,10 @@ namespace WypozyczalniaFilmow.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Count")
                         .HasColumnType("INTEGER");
@@ -53,10 +57,6 @@ namespace WypozyczalniaFilmow.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Genre")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("TEXT");
 
@@ -66,7 +66,7 @@ namespace WypozyczalniaFilmow.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Films", (string)null);
+                    b.ToTable("Films");
                 });
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Person", b =>
@@ -113,7 +113,7 @@ namespace WypozyczalniaFilmow.Migrations
 
                     b.HasIndex("FilmId");
 
-                    b.ToTable("Rents", (string)null);
+                    b.ToTable("Rents");
                 });
 
             modelBuilder.Entity("WypozyczalniaFilmow.Models.Actor", b =>
