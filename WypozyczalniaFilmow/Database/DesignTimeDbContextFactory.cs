@@ -8,8 +8,8 @@ namespace WypozyczalniaFilmow.Database
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlite("Data Source=WypozyczalniaFilmow.db");
-
+            //optionsBuilder.UseSqlite("Data Source=WypozyczalniaFilmow.db");
+            optionsBuilder.UseInMemoryDatabase("InMemoryDb");
             return new AppDbContext(optionsBuilder.Options);
         }
     }
