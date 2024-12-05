@@ -23,7 +23,9 @@ namespace WypozyczalniaFilmow.Database
             {
                 // Dodajemy nowych użytkowników do bazy
                 _context.Persons.AddRange(
-                    new Client { Name = "Jan", Surname = "Kowalski", Email = "jan@jan.pl", PhoneNumber = 123456789 }
+                    new Client { Name = "Jan", Surname = "Kowalski", Email = "jan@jan.pl", PhoneNumber = 123456789 },
+                    new Client { Name = "Kamila", Surname = "Nowak", Email = "kamila@nowak.pl", PhoneNumber = 123321432 },
+                    new Actor { Name = "Adam", Surname = "Nowak" }
                 );
 
                 _context.SaveChanges(); // Zapisujemy zmiany w bazie
