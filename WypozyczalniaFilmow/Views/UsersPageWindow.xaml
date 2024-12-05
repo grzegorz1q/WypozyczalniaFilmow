@@ -16,10 +16,11 @@
         <DataGrid ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" AutoGenerateColumns="False" Grid.Row="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                <DataGridTextColumn Header="Imię" Binding="{Binding Name}" Width="200"/>
-                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" Width="200"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
-                <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" Width="100"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" Width="150"/>
+                <DataGridTextColumn Header="Rola" Binding="{Binding Role}" Width="150"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
+                <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
         <views:UserRegistrationView Height="200"/>
