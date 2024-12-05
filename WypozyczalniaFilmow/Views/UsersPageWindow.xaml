@@ -1,0 +1,27 @@
+﻿<Page x:Class="WypozyczalniaFilmow.Views.UsersPageWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WypozyczalniaFilmow" xmlns:views="clr-namespace:WypozyczalniaFilmow.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UsersPageWindow">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" AutoGenerateColumns="False" Grid.Row="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Name}" Width="200"/>
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" Width="200"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+                <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <views:UserRegistrationView Height="200"/>
+    </Grid>
+</Page>

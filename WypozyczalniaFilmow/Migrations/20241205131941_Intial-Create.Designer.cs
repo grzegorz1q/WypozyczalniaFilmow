@@ -11,8 +11,8 @@ using WypozyczalniaFilmow.Database;
 namespace WypozyczalniaFilmow.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241204171223_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241205131941_Intial-Create")]
+    partial class IntialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
