@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WypozyczalniaFilmow.Views"
+             xmlns:local="clr-namespace:WypozyczalniaFilmow.Views" xmlns:viewmodels="clr-namespace:WypozyczalniaFilmow.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:UserViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="5 0 0 0">
@@ -39,7 +39,7 @@
                 Grid.Row="1" 
                 Grid.Column="0" 
                 Margin="0 5 0 0 "
-                Text="" />
+                Text="{Binding Name}" />
 
             <TextBlock 
                 Grid.Row="0" 
@@ -52,7 +52,7 @@
                 Grid.Row="1" 
                 Grid.Column="1" 
                 Margin="5 5 0 0 "
-                Text="" />
+                Text="{Binding Surname}" />
 
         </Grid>
 
@@ -76,7 +76,7 @@
         Grid.Row="1" 
         Grid.Column="0" 
         Margin="0 5 0 0 "
-        Text="" />
+        Text="{Binding Email}" />
 
             <TextBlock 
         Grid.Row="0" 
@@ -89,13 +89,13 @@
         Grid.Row="1" 
         Grid.Column="1" 
         Margin="5 5 0 0 "
-        Text="" />
+        Text="{Binding PhoneNumber}" />
 
         </Grid>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <Button Margin="0 5 0 0" Content="Submit"/>
-            <Button Margin="5 5 0 0" Content="Cancle"/>
+        <StackPanel Grid.Row= "3" Orientation="Horizontal">
+            <Button Command = "{Binding SubmitCommand}" Margin="0 5 0 0" Content="Submit"/>
+            <Button Command = "{Binding CancelCommand}" Margin="5 5 0 0" Content="Cancle"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -20,8 +20,88 @@ namespace WypozyczalniaFilmow.ViewModels
         public UserViewModel()
         {
             LoadUsers();
+            SubmitCommand = new RelayCommand(AddUser);
+            CancelCommand = new RelayCommand(ClearForm);
+            ClearForm();
         }
 
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private string _surname;
+        public string Surname
+        {
+            get
+            {
+                return _surname;
+            }
+            set
+            {
+                _surname = value;
+                OnPropertyChanged(nameof(Surname));
+            }
+        }
+
+        private string _email;
+        public string Email
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                _email = value;
+                OnPropertyChanged(nameof(Email));
+            }
+        }
+
+
+        private int _phonenumber;
+        public int PhoneNumber
+        {
+            get
+            {
+                return _phonenumber;
+            }
+            set
+            {
+                _phonenumber = value;
+                OnPropertyChanged(nameof(PhoneNumber));
+            }
+        }
+
+        public ICommand SubmitCommand { get; }
+        public ICommand CancelCommand { get; }
+
+        private void AddUser()
+        {
+            using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+            {
+                var newUser = new Client
+                {
+                    Name = this.Name,
+                    Surname = this.Surname,
+                    Email = this.Email,
+                    PhoneNumber = this.PhoneNumber
+                };
+
+                context.Persons.Add(newUser);
+                context.SaveChanges();
+                Users.Add(newUser);
+            }
+        }
         private void LoadUsers()
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
@@ -35,5 +115,12 @@ namespace WypozyczalniaFilmow.ViewModels
             }
         }
 
+        private void ClearForm()
+        {
+            Name = string.Empty;
+            Surname = string.Empty;
+            Email = string.Empty;
+            PhoneNumber = 0;
+        }
     }
 }
