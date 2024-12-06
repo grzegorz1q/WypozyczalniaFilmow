@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="WypozyczalniaFilmow.Views.FilmRegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WypozyczalniaFilmow.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="5 0 0 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+        Grid.Row="0"
+        Text="Dodaj Film"   
+        FontSize="24" />
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+            Grid.Row="0" 
+            Grid.Column="0"
+            Width="100"
+            Text="Title"/>
+
+            <TextBox 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Margin="0 5 0 0 "
+            Text="{Binding Title}" />
+
+            <TextBlock 
+            Grid.Row="0" 
+            Grid.Column="1" 
+            Width="100"
+            Margin="5 0 0 0 "
+            Text="Director"/>
+
+            <TextBox 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="5 5 0 0 "
+            Text="{Binding Director}" />
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+            Grid.Row="0" 
+            Grid.Column="0"
+            Width="100"
+            Text="Category"/>
+
+            <TextBox 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Margin="0 5 0 0 "
+            Text="{Binding Category}" />
+
+            <TextBlock 
+            Grid.Row="0" 
+            Grid.Column="1" 
+            Width="100"
+            Margin="5 0 0 0 "
+            Text="ReleaseDate"/>
+
+            <TextBox 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="5 5 0 0 "
+            Text="{Binding ReleaseDate}" />
+
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+            Grid.Row="0" 
+            Grid.Column="0"
+            Width="100"
+            Text="Description"/>
+
+            <TextBox 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Margin="0 5 0 0 "
+            Text="{Binding Description}" />
+
+            <TextBlock 
+            Grid.Row="0" 
+            Grid.Column="1" 
+            Width="100"
+            Margin="5 0 0 0 "
+            Text="Cover"/>
+
+            <TextBox 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="5 5 0 0 "
+            Text="{Binding Cover}" />
+
+            <TextBlock 
+            Grid.Row="0" 
+            Grid.Column="3" 
+            Width="40"
+            Margin="-50 0 0 0 "
+            Text="Count"/>
+
+            <TextBox 
+            Grid.Row="1"
+            Grid.Column="2"
+            Width="100"
+            Margin="5 5 0 0 "
+            Text="{Binding Count}" />
+
+        </Grid>
+
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <Button Command="{Binding SubmitCommand}" Margin="0 5 0 0" Content="Submit"/>
+            <Button Command="{Binding CancelCommand}" Margin="5 5 0 0" Content="Cancle"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
