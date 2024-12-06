@@ -19,12 +19,18 @@ namespace WypozyczalniaFilmow.ViewModels
         public MainViewModel()
         {
             NavigateToUserPageCommand = new RelayCommand(NavigateToUserPage);
+            NavigateToFilmPageCommand = new RelayCommand(NavigateToFilmPage);
         }
 
         private void NavigateToUserPage()
         {
             var mainWindow = (Application.Current.MainWindow as MainWindow);
             mainWindow?.MainFrame.Navigate(new UsersPageWindow());
+        }
+        private void NavigateToFilmPage()
+        {
+            var mainWindow = (Application.Current.MainWindow as MainWindow);
+            mainWindow?.MainFrame.Navigate(new FilmPageWindow());
         }
     }
 }

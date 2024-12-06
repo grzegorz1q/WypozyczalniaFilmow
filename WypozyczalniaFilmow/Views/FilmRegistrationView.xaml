@@ -148,8 +148,8 @@
 
 
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Button Margin="0 5 0 0" Content="Submit"/>
-            <Button Margin="5 5 0 0" Content="Cancle"/>
+            <Button Command="{Binding SubmitCommand}" Margin="0 5 0 0" Content="Submit"/>
+            <Button Command="{Binding CancelCommand}" Margin="5 5 0 0" Content="Cancle"/>
         </StackPanel>
     </Grid>
 </UserControl>
