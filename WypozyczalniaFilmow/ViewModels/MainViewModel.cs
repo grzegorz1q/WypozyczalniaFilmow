@@ -20,7 +20,7 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             NavigateToUserPageCommand = new RelayCommand(NavigateToUserPage);
             NavigateToFilmPageCommand = new RelayCommand(NavigateToFilmPage);
-            NavigateToFilmPageCommand = new RelayCommand(NavigateToRentPage);
+            NavigateToRentPageCommand = new RelayCommand(NavigateToRentPage);
         }
 
         private void NavigateToUserPage()

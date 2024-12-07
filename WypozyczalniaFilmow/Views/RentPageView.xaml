@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WypozyczalniaFilmow.Views"
              xmlns:views="clr-namespace:WypozyczalniaFilmow.Views"
+             xmlns:viewmodels="clr-namespace:WypozyczalniaFilmow.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,12 +18,22 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="0 10">
-            <CheckBox Content="Dodaj użytkownika" IsChecked="{Binding IsAddingUser}" Margin="0 0 20 0"/>
-            <CheckBox Content="Dodaj film" IsChecked="{Binding IsAddingMovie}"/>
+            <CheckBox Content="Dodaj użytkownika" 
+                      IsChecked="{Binding IsAddingUser}" 
+                      Command="{Binding AddUserCommand}" 
+                      Margin="0 0 20 0"/>
+            <CheckBox Content="Dodaj film" 
+                      IsChecked="{Binding IsAddingMovie}" 
+                      Command="{Binding AddMovieCommand}"/> 
+
         </StackPanel>
 
-        <views:UserRegistrationView Grid.Row="1" Visibility="{Binding IsAddingUser, Converter={StaticResource BoolToVisibilityConverter}}" Height="200"/>
+        <views:UserRegistrationView Grid.Row="1" 
+                                    Visibility="{Binding IsAddingUser, Converter={StaticResource BoolToVisibilityConverter}}" 
+                                    Height="200"/>
 
-        <views:FilmRegistrationView Grid.Row="2" Visibility="{Binding IsAddingMovie, Converter={StaticResource BoolToVisibilityConverter}}" Height="200"/>
+        <views:FilmRegistrationView Grid.Row="2"
+                                    Visibility="{Binding IsAddingMovie, Converter={StaticResource BoolToVisibilityConverter}}" 
+                                    Height="200"/>
     </Grid>
 </UserControl>

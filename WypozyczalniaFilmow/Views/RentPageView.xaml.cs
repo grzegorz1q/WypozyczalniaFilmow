@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WypozyczalniaFilmow.ViewModels;
 
 namespace WypozyczalniaFilmow.Views
 {
@@ -23,6 +24,8 @@ namespace WypozyczalniaFilmow.Views
         public RentPageView()
         {
             InitializeComponent();
+            DataContext = new RentPageViewModel();
+            //DataContext = new RentPageViewModel(new UserViewModel(), new FilmViewModel());
         }
     }
 }

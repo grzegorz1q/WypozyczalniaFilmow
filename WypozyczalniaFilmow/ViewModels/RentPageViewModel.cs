@@ -4,8 +4,9 @@ using WypozyczalniaFilmow.ViewModels;
 
 public class RentPageViewModel : ObservableObject
 {
-    private readonly UserViewModel _userViewModel;
-    private readonly FilmViewModel _filmViewModel;
+    public UserViewModel UserViewModel { get; set; }
+    public FilmViewModel FilmViewModel { get; set; }
+
 
     private bool _isAddingUser;
     public bool IsAddingUser
@@ -29,29 +30,36 @@ public class RentPageViewModel : ObservableObject
         }
     }
 
-    // Komendy
     public ICommand AddUserCommand { get; set; }
     public ICommand AddMovieCommand { get; set; }
 
-    public RentPageViewModel(UserViewModel userViewModel, FilmViewModel movieViewModel)
-    {
-        _userViewModel = userViewModel;
-        _filmViewModel = movieViewModel;
 
-        // Inicjalizacja komend, które będą wykonywać odpowiednie akcje
-        AddUserCommand = new RelayCommand(AddUser);
-        AddMovieCommand = new RelayCommand(AddMovie);
+/*    public RentPageViewModel(UserViewModel userViewModel, FilmViewModel filmViewModel)
+    {
+
+        UserViewModel = userViewModel;
+        FilmViewModel = filmViewModel;
+
+        AddUserCommand = new RelayCommand(() => ToggleAddUser());
+        AddMovieCommand = new RelayCommand(() => ToggleAddMovie());
+    }
+*/
+    public RentPageViewModel()
+    {
+        UserViewModel = new UserViewModel();
+        FilmViewModel = new FilmViewModel();
+
+/*        AddUserCommand = new RelayCommand(() => ToggleAddUser());
+        AddMovieCommand = new RelayCommand(() => ToggleAddMovie());*/
     }
 
-    private void AddUser()
+    private void ToggleAddUser()
     {
-        _userViewModel.AddUser();  // Wywołanie metody AddUser w UserViewModel
-        IsAddingUser = true;  // Zmieniamy stan, aby wyświetlić widok rejestracji użytkownika
+        IsAddingUser = !IsAddingUser;
     }
 
-    private void AddMovie()
+    private void ToggleAddMovie()
     {
-        _filmViewModel.AddFilms();  // Wywołanie metody AddMovie w MovieViewModel
-        IsAddingMovie = true;  // Zmieniamy stan, aby wyświetlić widok rejestracji filmu
+        IsAddingMovie = !IsAddingMovie;
     }
 }
