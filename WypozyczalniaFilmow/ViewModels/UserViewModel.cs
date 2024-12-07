@@ -6,10 +6,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WypozyczalniaFilmow.Database;
 using WypozyczalniaFilmow.Helpers;
 using WypozyczalniaFilmow.Models;
+using WypozyczalniaFilmow.Validators;
 
 namespace WypozyczalniaFilmow.ViewModels
 {
@@ -85,8 +87,39 @@ namespace WypozyczalniaFilmow.ViewModels
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
 
+        private string ValidateClient()
+        {
+            var client = new Client
+            {
+                Name = this.Name,
+                Surname = this.Surname,
+                Email = this.Email,
+                PhoneNumber = this.PhoneNumber
+            };
+
+            using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+            {
+                var validator = new ClientValidator(context);
+                var results = validator.Validate(client);
+
+                if (!results.IsValid)
+                {
+                    return string.Join("\n", results.Errors.Select(e => e.ErrorMessage));
+                }
+            }
+
+            return string.Empty;
+        }
+
         private void AddUser()
         {
+            var validationMessage = ValidateClient();
+            if (!string.IsNullOrEmpty(validationMessage))
+            {
+                MessageBox.Show(validationMessage, "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
                 var newUser = new Client
