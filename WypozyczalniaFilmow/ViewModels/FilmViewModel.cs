@@ -124,7 +124,7 @@ namespace WypozyczalniaFilmow.ViewModels
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
 
-        private void AddFilms()
+        public void AddFilms()
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {

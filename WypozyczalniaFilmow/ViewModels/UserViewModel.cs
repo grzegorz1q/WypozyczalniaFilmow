@@ -111,7 +111,7 @@ namespace WypozyczalniaFilmow.ViewModels
             return string.Empty;
         }
 
-        private void AddUser()
+        public void AddUser()
         {
             var validationMessage = ValidateClient();
             if (!string.IsNullOrEmpty(validationMessage))
