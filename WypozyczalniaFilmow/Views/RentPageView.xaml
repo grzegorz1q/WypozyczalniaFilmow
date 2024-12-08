@@ -2,13 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WypozyczalniaFilmow.Views"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:WypozyczalniaFilmow.Views"
-             xmlns:viewmodels="clr-namespace:WypozyczalniaFilmow.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -28,13 +26,15 @@
         </StackPanel>
 
         <views:UserRegistrationView Grid.Row="1" 
-                                    Visibility="{Binding IsAddingUser, Converter={StaticResource BoolToVisibilityConverter}}" 
-                                    Height="200"
-                                    DataContext="{Binding UserViewModel}"/>
+                            Visibility="{Binding IsAddingUser, Converter={StaticResource BoolToVisibilityConverter}}"
+                            Height="200"
+                            DataContext="{Binding UserViewModel}"
+                            />
 
         <views:FilmRegistrationView Grid.Row="2"
-                                    Visibility="{Binding IsAddingMovie, Converter={StaticResource BoolToVisibilityConverter}}" 
-                                    Height="200"
-                                    DataContext="{Binding FilmViewModel}"/>
+                            Visibility="{Binding IsAddingMovie, Converter={StaticResource BoolToVisibilityConverter}}" 
+                            Height="200"
+                            DataContext="{Binding FilmViewModel}"
+                            />
     </Grid>
 </UserControl>

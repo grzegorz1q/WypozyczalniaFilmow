@@ -7,9 +7,6 @@ public class RentPageViewModel : ObservableObject
 {
     private UserViewModel _userViewModel;
     private FilmViewModel _filmViewModel;
-    public ICommand AddUserCheck { get; set; }
-    public ICommand AddFilmCheck { get; set; }
-
     public UserViewModel UserViewModel
     {
         get => _userViewModel;
@@ -36,7 +33,7 @@ public class RentPageViewModel : ObservableObject
         get => _isAddingUser;
         set
         {
-            Debug.WriteLine($"Changing IsAddingUser from {_isAddingUser} to {value}");
+            Debug.WriteLine($"Changing IsAddingUser in RentPageViewModel from {_isAddingUser} to {value}");
             _isAddingUser = value;
             OnPropertyChanged(nameof(IsAddingUser));
         }
@@ -48,20 +45,23 @@ public class RentPageViewModel : ObservableObject
         get => _isAddingMovie;
         set
         {
-            Debug.WriteLine($"Changing IsAddingMovie from {_isAddingMovie} to {value}");
+            Debug.WriteLine($"Changing IsAddingMovie in RentPageViewModel from {_isAddingMovie} to {value}");
             _isAddingMovie = value;
             OnPropertyChanged(nameof(IsAddingMovie));
         }
     }
-    public RentPageViewModel(UserViewModel userViewModel, FilmViewModel filmViewModel)
-    {
-        UserViewModel = userViewModel;
-        FilmViewModel = filmViewModel;
-    }
 
-/*    public RentPageViewModel()
+    public RentPageViewModel()
     {
         UserViewModel = new UserViewModel();
         FilmViewModel = new FilmViewModel();
+    }
+
+/*    public RentPageViewModel(UserViewModel userViewModel, FilmViewModel filmViewModel)
+    {
+        UserViewModel = userViewModel;
+        FilmViewModel = filmViewModel;
+
+        Debug.WriteLine("RentPageViewModel initialized with UserViewModel and FilmViewModel");
     }*/
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
@@ -7,14 +6,22 @@ namespace WypozyczalniaFilmow.Helpers
 {
     public class BoolToVisibilityConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return value is bool b && b ? Visibility.Visible : Visibility.Collapsed;
+            if (value is bool b)
+            {
+                return b ? Visibility.Visible : Visibility.Collapsed;
+            }
+            return Visibility.Collapsed;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return value is Visibility v && v == Visibility.Visible;
+            if (value is Visibility visibility)
+            {
+                return visibility == Visibility.Visible;
+            }
+            return false;
         }
     }
 }

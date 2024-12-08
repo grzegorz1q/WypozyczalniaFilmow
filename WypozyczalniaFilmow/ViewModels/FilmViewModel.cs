@@ -24,6 +24,21 @@ namespace WypozyczalniaFilmow.ViewModels
             //CancelFilmCommand = new RelayCommand();
         }
 
+        public ICommand SubmitFilmCommand { get; }
+        public ICommand CancelFilmCommand { get; }
+
+        private bool _isAddingMovie;
+        public bool IsAddingMovie
+        {
+            get => _isAddingMovie;
+            set
+            {
+                Debug.WriteLine($"Changing IsAddingMovie in FIlm from {_isAddingMovie} to {value}");
+                _isAddingMovie = value;
+                OnPropertyChanged(nameof(IsAddingMovie));
+            }
+        }
+
         private string _title;
         public string Title
         {
@@ -121,21 +136,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Count));
             }
         }
-
-        private bool _isAddingMovie;
-        public bool IsAddingMovie
-        {
-            get => _isAddingMovie;
-            set
-            {
-                Debug.WriteLine($"Changing IsAddingMovie from {_isAddingMovie} to {value}");
-                _isAddingMovie = value;
-                OnPropertyChanged(nameof(IsAddingMovie));
-            }
-        }
-
-        public ICommand SubmitFilmCommand { get; }
-        public ICommand CancelFilmCommand { get; }
 
         public void AddFilms()
         {

@@ -19,7 +19,6 @@ namespace WypozyczalniaFilmow.ViewModels
     public class UserViewModel : ObservableObject
     {
         public ObservableCollection<Client> Users { get; set; } = default!;
-        public Client SelectedUser { get; set; }
         public UserViewModel()
         {
             LoadUsers();
@@ -84,26 +83,21 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(PhoneNumber));
             }
         }
+
+        public ICommand SubmitUserCommand { get; }
+        public ICommand CancelUserCommand { get; }
+
         private bool _isAddingUser;
         public bool IsAddingUser
         {
             get => _isAddingUser;
             set
             {
-                Debug.WriteLine($"Changing IsAddingUser from {_isAddingUser} to {value}");
+                Debug.WriteLine($"Changing IsAddingUser in User from {_isAddingUser} to {value}");
                 _isAddingUser = value;
                 OnPropertyChanged(nameof(IsAddingUser));
             }
         }
-
-        private void ToggleAddUser()
-{
-    IsAddingUser = !IsAddingUser;
-    Debug.WriteLine($"IsAddingUser: {IsAddingUser}");
-}
-
-        public ICommand SubmitUserCommand { get; }
-        public ICommand CancelUserCommand { get; }
 
         private string ValidateClient()
         {
