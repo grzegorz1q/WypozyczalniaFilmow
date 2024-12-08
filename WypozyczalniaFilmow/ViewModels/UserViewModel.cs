@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,8 @@ namespace WypozyczalniaFilmow.ViewModels
         public UserViewModel()
         {
             LoadUsers();
-            SubmitCommand = new RelayCommand(AddUser);
-            CancelCommand = new RelayCommand(ClearForm);
+            SubmitUserCommand = new RelayCommand(AddUser);
+            CancelUserCommand = new RelayCommand(ClearForm);
             ClearForm();
         }
 
@@ -83,9 +84,26 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(PhoneNumber));
             }
         }
+        private bool _isAddingUser;
+        public bool IsAddingUser
+        {
+            get => _isAddingUser;
+            set
+            {
+                Debug.WriteLine($"Changing IsAddingUser from {_isAddingUser} to {value}");
+                _isAddingUser = value;
+                OnPropertyChanged(nameof(IsAddingUser));
+            }
+        }
 
-        public ICommand SubmitCommand { get; }
-        public ICommand CancelCommand { get; }
+        private void ToggleAddUser()
+{
+    IsAddingUser = !IsAddingUser;
+    Debug.WriteLine($"IsAddingUser: {IsAddingUser}");
+}
+
+        public ICommand SubmitUserCommand { get; }
+        public ICommand CancelUserCommand { get; }
 
         private string ValidateClient()
         {
@@ -139,11 +157,8 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                // Debugowanie liczby użytkowników
                 var usersFromDb = context.Persons.OfType<Client>().ToList();
                 Console.WriteLine($"Liczba użytkowników w bazie: {usersFromDb.Count}");
-
-                // Przypisanie do ObservableCollection
                 Users = new ObservableCollection<Client>(usersFromDb);
             }
         }

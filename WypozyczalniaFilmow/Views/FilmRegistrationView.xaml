@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WypozyczalniaFilmow.Views"
+             xmlns:local="clr-namespace:WypozyczalniaFilmow.Views" xmlns:viewmodels="clr-namespace:WypozyczalniaFilmow.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:FilmViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="5 0 0 0">
@@ -148,8 +148,8 @@
 
 
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Button Command="{Binding SubmitCommand}" Margin="0 5 0 0" Content="Submit"/>
-            <Button Command="{Binding CancelCommand}" Margin="5 5 0 0" Content="Cancle"/>
+            <Button Command="{Binding SubmitFilmCommand}" Margin="0 5 0 0" Content="Submit"/>
+            <Button Command="{Binding CancelFilmCommand}" Margin="5 5 0 0" Content="Cancle"/>
         </StackPanel>
     </Grid>
 </UserControl>

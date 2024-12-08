@@ -1,12 +1,34 @@
-﻿using System.Windows.Input;
+﻿using System.Diagnostics;
+using System.Windows.Input;
 using WypozyczalniaFilmow.Helpers;
 using WypozyczalniaFilmow.ViewModels;
 
 public class RentPageViewModel : ObservableObject
 {
-    public UserViewModel UserViewModel { get; set; }
-    public FilmViewModel FilmViewModel { get; set; }
+    private UserViewModel _userViewModel;
+    private FilmViewModel _filmViewModel;
+    public ICommand AddUserCheck { get; set; }
+    public ICommand AddFilmCheck { get; set; }
 
+    public UserViewModel UserViewModel
+    {
+        get => _userViewModel;
+        set
+        {
+            _userViewModel = value;
+            OnPropertyChanged(nameof(UserViewModel));
+        }
+    }
+
+    public FilmViewModel FilmViewModel
+    {
+        get => _filmViewModel;
+        set
+        {
+            _filmViewModel = value;
+            OnPropertyChanged(nameof(FilmViewModel));
+        }
+    }
 
     private bool _isAddingUser;
     public bool IsAddingUser
@@ -14,6 +36,7 @@ public class RentPageViewModel : ObservableObject
         get => _isAddingUser;
         set
         {
+            Debug.WriteLine($"Changing IsAddingUser from {_isAddingUser} to {value}");
             _isAddingUser = value;
             OnPropertyChanged(nameof(IsAddingUser));
         }
@@ -25,41 +48,20 @@ public class RentPageViewModel : ObservableObject
         get => _isAddingMovie;
         set
         {
+            Debug.WriteLine($"Changing IsAddingMovie from {_isAddingMovie} to {value}");
             _isAddingMovie = value;
             OnPropertyChanged(nameof(IsAddingMovie));
         }
     }
-
-    public ICommand AddUserCommand { get; set; }
-    public ICommand AddMovieCommand { get; set; }
-
-
-/*    public RentPageViewModel(UserViewModel userViewModel, FilmViewModel filmViewModel)
+    public RentPageViewModel(UserViewModel userViewModel, FilmViewModel filmViewModel)
     {
-
         UserViewModel = userViewModel;
         FilmViewModel = filmViewModel;
-
-        AddUserCommand = new RelayCommand(() => ToggleAddUser());
-        AddMovieCommand = new RelayCommand(() => ToggleAddMovie());
     }
-*/
-    public RentPageViewModel()
+
+/*    public RentPageViewModel()
     {
         UserViewModel = new UserViewModel();
         FilmViewModel = new FilmViewModel();
-
-/*        AddUserCommand = new RelayCommand(() => ToggleAddUser());
-        AddMovieCommand = new RelayCommand(() => ToggleAddMovie());*/
-    }
-
-    private void ToggleAddUser()
-    {
-        IsAddingUser = !IsAddingUser;
-    }
-
-    private void ToggleAddMovie()
-    {
-        IsAddingMovie = !IsAddingMovie;
-    }
+    }*/
 }

@@ -24,8 +24,8 @@ namespace WypozyczalniaFilmow.Views
         public RentPageView()
         {
             InitializeComponent();
-            DataContext = new RentPageViewModel();
-            //DataContext = new RentPageViewModel(new UserViewModel(), new FilmViewModel());
+            //DataContext = new RentPageViewModel();
+            DataContext = new RentPageViewModel(new UserViewModel(), new FilmViewModel());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,8 @@ namespace WypozyczalniaFilmow.ViewModels
         public FilmViewModel()
         {
             LoadFilms();
-            SubmitCommand = new RelayCommand(AddFilms);
+            SubmitFilmCommand = new RelayCommand(AddFilms);
+            //CancelFilmCommand = new RelayCommand();
         }
 
         private string _title;
@@ -120,9 +122,20 @@ namespace WypozyczalniaFilmow.ViewModels
             }
         }
 
+        private bool _isAddingMovie;
+        public bool IsAddingMovie
+        {
+            get => _isAddingMovie;
+            set
+            {
+                Debug.WriteLine($"Changing IsAddingMovie from {_isAddingMovie} to {value}");
+                _isAddingMovie = value;
+                OnPropertyChanged(nameof(IsAddingMovie));
+            }
+        }
 
-        public ICommand SubmitCommand { get; }
-        public ICommand CancelCommand { get; }
+        public ICommand SubmitFilmCommand { get; }
+        public ICommand CancelFilmCommand { get; }
 
         public void AddFilms()
         {
@@ -148,11 +161,8 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                // Debugowanie liczby użytkowników
                 var filmsFromDb = context.Films.ToList();
                 Console.WriteLine($"Liczba użytkowników w bazie: {filmsFromDb.Count}");
-
-                // Przypisanie do ObservableCollection
                 Films = new ObservableCollection<Film>(filmsFromDb);
             }
         }
