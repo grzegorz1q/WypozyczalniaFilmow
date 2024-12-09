@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Films}" SelectedItem="{Binding SelectedFilm}" AutoGenerateColumns="False" Grid.Row="0">
+        <DataGrid ItemsSource="{Binding Films}" AutoGenerateColumns="False" Grid.Row="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                 <DataGridTextColumn Header="Tytuł" Binding="{Binding Title}" Width="150"/>

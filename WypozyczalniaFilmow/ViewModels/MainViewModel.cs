@@ -20,6 +20,7 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             NavigateToUserPageCommand = new RelayCommand(NavigateToUserPage);
             NavigateToFilmPageCommand = new RelayCommand(NavigateToFilmPage);
+            NavigateToRentPageCommand = new RelayCommand(NavigateToRentPage);
         }
 
         private void NavigateToUserPage()
@@ -31,6 +32,11 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             var mainWindow = (Application.Current.MainWindow as MainWindow);
             mainWindow?.MainFrame.Navigate(new FilmPageWindow());
+        }
+        private void NavigateToRentPage()
+        {
+            var mainWindow = (Application.Current.MainWindow as MainWindow);
+            mainWindow?.MainFrame.Navigate(new RentPageWindow());
         }
     }
 }
