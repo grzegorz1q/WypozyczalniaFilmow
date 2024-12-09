@@ -9,32 +9,11 @@
              >
 
     <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <views:UserRegistrationView 
+                x:Name="userView"
+                Height="200"
+                DataContext="{Binding UserViewModel}"/> 
 
-        <StackPanel Orientation="Horizontal" Margin="0 10">
-            <CheckBox Content="Dodaj użytkownika" 
-                      IsChecked="{Binding IsAddingUser, Mode=TwoWay}" 
-                      Margin="0 0 20 0"/>
-            <CheckBox Content="Dodaj film" 
-                      IsChecked="{Binding IsAddingMovie, Mode=TwoWay}" /> 
-
-        </StackPanel>
-
-        <views:UserRegistrationView Grid.Row="1" 
-                            Visibility="{Binding IsAddingUser, Converter={StaticResource BoolToVisibilityConverter}}"
-                            Height="200"
-                            DataContext="{Binding UserViewModel}"
-                            />
-
-        <views:FilmRegistrationView Grid.Row="2"
-                            Visibility="{Binding IsAddingMovie, Converter={StaticResource BoolToVisibilityConverter}}" 
-                            Height="200"
-                            DataContext="{Binding FilmViewModel}"
-                            />
+        <Button Content="Button" HorizontalAlignment="Left" Margin="80,60,0,0" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 </UserControl>

@@ -21,12 +21,27 @@ namespace WypozyczalniaFilmow.Views
     /// </summary>
     public partial class RentPageView : UserControl
     {
+        bool hidden = true;
         public RentPageView()
         {
             InitializeComponent();
-            DataContext = new RentPageViewModel();
-            //DataContext = new RentPageViewModel(new UserViewModel(), new FilmViewModel());
+            var userViewModel = new UserViewModel();
+            var filmViewModel = new FilmViewModel();
+            DataContext = new RentPageViewModel(userViewModel);
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(hidden == true)
+            {
+                userView.Visibility = Visibility.Hidden;
+                hidden = false;
+            }
+            else
+            {
+                userView.Visibility = Visibility.Visible; 
+                hidden = true;
+            }
+        }
     }
 }

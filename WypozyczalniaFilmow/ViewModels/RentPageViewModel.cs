@@ -7,7 +7,31 @@ namespace WypozyczalniaFilmow.ViewModels
 {
     public class RentPageViewModel : ObservableObject
     {
-        private UserViewModel _userViewModel;
+
+        private bool _isAddingUser;
+        public bool IsAddingUser
+        {
+            get => _isAddingUser;
+            set
+            {
+                if (_isAddingUser != value)
+                {
+                    _isAddingUser = value;
+                    OnPropertyChanged(nameof(IsAddingUser));  // Poprawne wywołanie OnPropertyChanged
+                }
+            }
+        }
+
+        public UserViewModel UserViewModel { get; set; }
+
+        public RentPageViewModel(UserViewModel userViewModel)
+        {
+            UserViewModel = userViewModel;
+
+        }
+
+
+        /*private UserViewModel _userViewModel;
         private FilmViewModel _filmViewModel;
         public UserViewModel UserViewModel
         {
@@ -59,13 +83,13 @@ namespace WypozyczalniaFilmow.ViewModels
             FilmViewModel = new FilmViewModel();
         }
 
-        /*    public RentPageViewModel(UserViewModel userViewModel, FilmViewModel filmViewModel)
+        *//*    public RentPageViewModel(UserViewModel userViewModel, FilmViewModel filmViewModel)
             {
                 UserViewModel = userViewModel;
                 FilmViewModel = filmViewModel;
 
                 Debug.WriteLine("RentPageViewModel initialized with UserViewModel and FilmViewModel");
-            }*/
+            }*//*
+    }*/
     }
-
 }
