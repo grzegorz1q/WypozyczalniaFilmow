@@ -20,14 +20,8 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             LoadFilms();
             SubmitCommand = new RelayCommand(AddFilms);
+            CancelCommand = new RelayCommand(ClearForm);
         }
-        public string Title { get; set; }
-        public string Director {  get; set; }
-        public string Category { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public string Description { get; set; }
-        public string Cover { get; set; }
-        public int Count { get; set; }
 
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
@@ -65,11 +59,22 @@ namespace WypozyczalniaFilmow.ViewModels
             }
         }
 
+        private void ClearForm()
+        {
+            Title = string.Empty;
+            Director = string.Empty;
+            Category = string.Empty;
+            ReleaseDate = DateTime.Now;
+            Description = string.Empty;
+            Cover = string.Empty;
+            Count = default!;
+
+        }
 
 
 
 
-        /*private string _title;
+        private string _title;
         public string Title
         {
             get
@@ -165,7 +170,7 @@ namespace WypozyczalniaFilmow.ViewModels
                 _count = value;
                 OnPropertyChanged(nameof(Count));
             }
-        }*/
+        }
 
     }
 }
