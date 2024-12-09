@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +16,60 @@ namespace WypozyczalniaFilmow.ViewModels
     public class FilmViewModel : ObservableObject
     {
         public ObservableCollection<Film> Films { get; set; }
-        public Film SelectedFilm { get; set; }
         public FilmViewModel()
         {
             LoadFilms();
             SubmitCommand = new RelayCommand(AddFilms);
         }
+        public string Title { get; set; }
+        public string Director {  get; set; }
+        public string Category { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public string Description { get; set; }
+        public string Cover { get; set; }
+        public int Count { get; set; }
 
-        private string _title;
+        public ICommand SubmitCommand { get; }
+        public ICommand CancelCommand { get; }
+
+        private void AddFilms()
+        {
+            using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+            {
+                var newFilm = new Film
+                {
+                    Title = this.Title,
+                    Director = this.Director,
+                    Category = this.Category,
+                    ReleaseDate = this.ReleaseDate,
+                    Description = this.Description,
+                    Cover = this.Cover,
+                    Count = this.Count,
+                };
+
+                context.Films.Add(newFilm);
+                context.SaveChanges();
+                Films.Add(newFilm);
+            }
+        }
+        private void LoadFilms()
+        {
+            using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+            {
+                // Debugowanie liczby użytkowników
+                var filmsFromDb = context.Films.ToList();
+                Console.WriteLine($"Liczba użytkowników w bazie: {filmsFromDb.Count}");
+
+                // Przypisanie do ObservableCollection
+                Films = new ObservableCollection<Film>(filmsFromDb);
+            }
+        }
+
+
+
+
+
+        /*private string _title;
         public string Title
         {
             get
@@ -118,44 +165,7 @@ namespace WypozyczalniaFilmow.ViewModels
                 _count = value;
                 OnPropertyChanged(nameof(Count));
             }
-        }
-
-
-        public ICommand SubmitCommand { get; }
-        public ICommand CancelCommand { get; }
-
-        private void AddFilms()
-        {
-            using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
-            {
-                var newFilm = new Film
-                {
-                    Title = this.Title,
-                    Director = this.Director,
-                    Category = this.Category,
-                    ReleaseDate = this.ReleaseDate,
-                    Description = this.Description,
-                    Cover = this.Cover,
-                    Count = this.Count,
-                };
-
-                context.Films.Add(newFilm);
-                context.SaveChanges();
-                Films.Add(newFilm);
-            }
-        }
-        private void LoadFilms()
-        {
-            using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
-            {
-                // Debugowanie liczby użytkowników
-                var filmsFromDb = context.Films.ToList();
-                Console.WriteLine($"Liczba użytkowników w bazie: {filmsFromDb.Count}");
-
-                // Przypisanie do ObservableCollection
-                Films = new ObservableCollection<Film>(filmsFromDb);
-            }
-        }
+        }*/
 
     }
 }
