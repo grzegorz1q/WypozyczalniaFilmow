@@ -22,63 +22,14 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _contentText = "Pokaż pole wprowadzania użytkownika";
         private Client _selectedUser = default!;
         private Film _selectedFilm = default!;
-        //private DateTime _rentDate;
-        public ObservableCollection<Rent> Rents { get; set; } = default!;
-        /*public string SelectedUserFilmsListLabel =>
-        SelectedUser != null
-            ? $"Lista filmów użytkownika: {SelectedUser.Name} {SelectedUser.Surname}"
-            : "Wybierz użytkownika";*/
-        public string SelectedUserFilmsListLabel
-        {
-            get
-            {
-                if (SelectedUser != null)
-                {
-                    return $"Lista filmów użytkownika: {SelectedUser.Name} {SelectedUser.Surname}";
-                }
-                else
-                {
-                    return "Wybierz użytkownika";
-                }
-            }
-        }
-        public IEnumerable<Rent> ClientRentsDetails
-        {
-            get
-            {
-                if (SelectedUser == null)
-                {
-                    // Jeśli SelectedUser jest null, zwróć pustą kolekcję
-                    Rents = new ObservableCollection<Rent>(Enumerable.Empty<Rent>());
-                    Debug.WriteLine($"Komunikat SelectedUser is null");
-                    return Rents;
-                }
-                else
-                {
-                    using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
-                    {
-                        var rentsFromDb = context.Rents
-                            .Where(r => r.ClientId == this.SelectedUser.Id)
-                            .Include(r => r.Client)
-                            .Include(r => r.Film)
-                            .ToList();
-                        Debug.WriteLine($"Liczba wypożyczeń w bazie: {rentsFromDb.Count}");
-
-                        Rents = new ObservableCollection<Rent>(rentsFromDb);
-                        return Rents;
-                    }
-                }
-            }
-        }
-        
-
+        private string _selectedUserFilmsListLabel = "Wybierz użytkownika";
+        public ObservableCollection<Rent> Rents { get; set; } = new ObservableCollection<Rent>();
         public ICommand ShowAddUserFormCommand { get; }
         public ICommand RentFilmCommand { get; }
         public RentViewModel()
         {
             ShowAddUserFormCommand = new RelayCommand(ShowUserRegistration);
             RentFilmCommand = new RelayCommand(RentFilm);
-            //LoadRents();
         }
         private void ShowUserRegistration()
         {
@@ -102,9 +53,8 @@ namespace WypozyczalniaFilmow.ViewModels
 
                 if (existingRent != null)
                 {
-                    // Jeśli istnieje, wyświetl komunikat
                     MessageBox.Show("Ten użytkownik już wypożyczył ten film.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return; // Zatrzymaj dalsze wykonywanie metody
+                    return;
                 }
                 var newRent = new Rent
                 {
@@ -117,6 +67,7 @@ namespace WypozyczalniaFilmow.ViewModels
                 newRent.Client = this.SelectedUser;
                 newRent.Film = this.SelectedFilm;
                 Rents.Add(newRent);
+            
                 Debug.WriteLine($"Added rent: Client={newRent.Client?.Name}, Film={newRent.Film?.Title}");
             }
         }
@@ -126,13 +77,17 @@ namespace WypozyczalniaFilmow.ViewModels
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
                 var rentsFromDb = context.Rents
-                   // .Where(r => r.ClientId == this.SelectedUser?.Id)
+                    .Where(r => r.ClientId == this.SelectedUser.Id)
                     .Include(r => r.Client)
                     .Include(r => r.Film)
                     .ToList();
                 Debug.WriteLine($"Liczba wypożyczeń w bazie: {rentsFromDb.Count}");
 
-                Rents = new ObservableCollection<Rent>(rentsFromDb);
+                Rents.Clear();
+                foreach (var rent in rentsFromDb)
+                {
+                    Rents.Add(rent);
+                }
             }
         }
 
@@ -156,6 +111,15 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(AddUserVisibility));
             }
         }
+        public string SelectedUserFilmsListLabel
+        {
+            get => _selectedUserFilmsListLabel;
+            set
+            {
+                _selectedUserFilmsListLabel = value;
+                OnPropertyChanged(nameof(SelectedUserFilmsListLabel));
+            }
+        }
         public Client SelectedUser
         {
             get => _selectedUser;
@@ -163,7 +127,11 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 _selectedUser = value;
                 OnPropertyChanged(nameof(SelectedUser));
-                OnPropertyChanged(nameof(SelectedUserFilmsListLabel));
+                SelectedUserFilmsListLabel = $"Lista filmów użytkownika: {SelectedUser.Name} {SelectedUser.Surname}";
+                if (_selectedUser != null)
+                {
+                    LoadRents();
+                }
             }
         }
         public Film SelectedFilm
