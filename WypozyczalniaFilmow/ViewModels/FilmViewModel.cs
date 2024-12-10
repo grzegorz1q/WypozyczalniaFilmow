@@ -15,7 +15,14 @@ namespace WypozyczalniaFilmow.ViewModels
 {
     public class FilmViewModel : ObservableObject
     {
-        public ObservableCollection<Film> Films { get; set; }
+        public ObservableCollection<Film> Films { get; set; } = default!;
+        private string _title = string.Empty;
+        private string _director = string.Empty;
+        private string _category = string.Empty;
+        private DateTime _releasedate;
+        private string _description = string.Empty;
+        private string _cover = string.Empty;
+        private int _count;
         public FilmViewModel()
         {
             LoadFilms();
@@ -71,10 +78,6 @@ namespace WypozyczalniaFilmow.ViewModels
 
         }
 
-
-
-
-        private string _title;
         public string Title
         {
             get
@@ -87,8 +90,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Title));
             }
         }
-
-        private string _director;
         public string Director
         {
             get
@@ -101,8 +102,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Director));
             }
         }
-
-        private string _category;
         public string Category
         {
             get
@@ -115,9 +114,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Category));
             }
         }
-
-
-        private DateTime _releasedate;
         public DateTime ReleaseDate
         {
             get
@@ -130,8 +126,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(ReleaseDate));
             }
         }
-
-        private string _description;
         public string Description
         {
             get
@@ -144,7 +138,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Description));
             }
         }
-        private string _cover;
         public string Cover
         {
             get
@@ -157,8 +150,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Cover));
             }
         }
-
-        private int _count;
         public int Count
         {
             get
