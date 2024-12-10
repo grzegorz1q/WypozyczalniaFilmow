@@ -18,6 +18,10 @@ namespace WypozyczalniaFilmow.ViewModels
     public class UserViewModel : ObservableObject
     {
         public ObservableCollection<Client> Users { get; set; } = default!;
+        private string _name = string.Empty!;
+        private string _surname = string.Empty!;
+        private string _email = string.Empty!;
+        private int _phonenumber;
         public UserViewModel()
         {
             LoadUsers();
@@ -97,8 +101,7 @@ namespace WypozyczalniaFilmow.ViewModels
         }
 
 
-
-        private string _name;
+        //Gettery i Settery
         public string Name
         {
             get
@@ -111,8 +114,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-        private string _surname;
         public string Surname
         {
             get
@@ -125,8 +126,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Surname));
             }
         }
-
-        private string _email;
         public string Email
         {
             get
@@ -139,9 +138,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Email));
             }
         }
-
-
-        private int _phonenumber;
         public int PhoneNumber
         {
             get
