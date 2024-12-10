@@ -11,6 +11,5 @@
         <Style TargetType="TextBlock">
             <Setter Property="Padding" Value="2"/>
         </Style>
-        
     </Application.Resources>
 </Application>

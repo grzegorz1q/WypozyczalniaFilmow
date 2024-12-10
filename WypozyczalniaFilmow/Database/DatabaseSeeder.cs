@@ -30,6 +30,14 @@ namespace WypozyczalniaFilmow.Database
 
                 _context.SaveChanges(); // Zapisujemy zmiany w bazie
             }
+            if(!_context.Films.Any())
+            {
+                _context.Films.AddRange(
+                    new Film { Title = "Skazani na Shawshank"},
+                    new Film { Title = "W pustyni i w puszczy"}
+                );
+                _context.SaveChanges();
+            }
         }
     }
 }
