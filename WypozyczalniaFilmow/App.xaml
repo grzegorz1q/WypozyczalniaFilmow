@@ -6,11 +6,19 @@
     <Application.Resources>
         <Style TargetType="Button">
             <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Background" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="AntiqueWhite"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style TargetType="TextBlock">
             <Setter Property="Padding" Value="2"/>
         </Style>
         
+        
+
     </Application.Resources>
 </Application>

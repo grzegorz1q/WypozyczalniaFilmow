@@ -7,12 +7,58 @@
         mc:Ignorable="d"
         Title="Wypożyczalnia filmów" Height="450" Width="800">
     <Grid>
-        <Menu VerticalAlignment="Top">
-            <MenuItem Header="Użytkownicy" Command="{Binding NavigateToUserPageCommand}" />
-            <MenuItem Header="Filmy" Command="{Binding NavigateToFilmPageCommand}" />
-            <MenuItem Header="Wypożyczenia" Command="{Binding NavigateToRentPageCommand}" />
-        </Menu>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" />
+        <!-- Menu boczne -->
+        <StackPanel Background="#23262B"
+                    Grid.Column="0"
+                    Orientation="Vertical">
+
+            <!-- Logo -->
+
+            <Menu Background="Transparent"
+                  Margin="0 40 0 0">
+
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+
+                <!-- Home -->
+                <MenuItem Header="Home" Foreground="white">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Styles/Assets/img_home.png" Stretch="Uniform"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <!-- Użytkownicy -->
+                <MenuItem Header="Użytkownicy" Foreground="white" Command="{Binding NavigateToUserPageCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Styles/Assets/img_artist.png" Stretch="Uniform"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <!-- Filmy -->
+                <MenuItem Header="Filmy" Foreground="white" Command="{Binding NavigateToFilmPageCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Styles/Assets/img_movies.png" Stretch="Uniform"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <!-- Wypożyczenia -->
+                <MenuItem Header="Wypożyczenia" Foreground="white" Command="{Binding NavigateToRentPageCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Styles/Assets/img_history.png" Stretch="Uniform"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+
+
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

@@ -22,5 +22,6 @@ namespace WypozyczalniaFilmow.Views
             InitializeComponent();
             DataContext = new MainViewModel();
         }
+
     }
 }

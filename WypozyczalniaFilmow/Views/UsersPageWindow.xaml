@@ -5,16 +5,33 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WypozyczalniaFilmow"
       xmlns:views="clr-namespace:WypozyczalniaFilmow.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="UsersPageWindow">
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="UsersPageWindow" Height="458">
 
-    <Grid Margin="0 50 0 0">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" Grid.Row="0" IsReadOnly="True">
+
+        <TextBlock Text="Lista użytkowników" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   Foreground="DarkGray" 
+                   Margin="0 0 0 10"
+                   Grid.Row="0" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"/>
+
+        <DataGrid ItemsSource="{Binding Users}" 
+                  AutoGenerateColumns="False" 
+                  Grid.Row="0" 
+                  Margin="0 40 0 10" 
+                  IsReadOnly="True"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  AlternatingRowBackground="AntiqueWhite"
+                  RowBackground="White">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                 <DataGridTextColumn Header="Imię" Binding="{Binding Name}" Width="150"/>
@@ -24,6 +41,15 @@
                 <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
-        <views:UserRegistrationView Height="200"/>
+
+        <Border Grid.Row="1" 
+                Margin="0 10 0 0" 
+                Padding="10" 
+                Background="#f3f3f3" 
+                CornerRadius="5"
+                BorderBrush="#ddd" 
+                BorderThickness="1">
+            <views:UserRegistrationView Margin="0,0,0,-1"/>
+        </Border>
     </Grid>
 </Page>
