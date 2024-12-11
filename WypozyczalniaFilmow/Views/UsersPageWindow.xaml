@@ -5,13 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WypozyczalniaFilmow"
       xmlns:views="clr-namespace:WypozyczalniaFilmow.Views"
-      mc:Ignorable="d" d:DesignWidth="800"
-      Title="UsersPageWindow" Height="458">
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UsersPageWindow" >
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="Lista użytkowników" 
@@ -33,15 +34,14 @@
                   AlternatingRowBackground="AntiqueWhite"
                   RowBackground="White">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                <DataGridTextColumn Header="Imię" Binding="{Binding Name}" Width="150"/>
-                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" Width="150"/>
-                <DataGridTextColumn Header="Rola" Binding="{Binding Role}" Width="150"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
-                <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" Width="150"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Name}" Width="2*"/>
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" Width="2*"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="2*"/>
+                <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" Width="2*"/>
             </DataGrid.Columns>
         </DataGrid>
 
+        <!-- Widok rejestracji użytkowników -->
         <Border Grid.Row="1" 
                 Margin="0 10 0 0" 
                 Padding="10" 
@@ -49,7 +49,8 @@
                 CornerRadius="5"
                 BorderBrush="#ddd" 
                 BorderThickness="1">
-            <views:UserRegistrationView Margin="0,0,0,-1"/>
+            <views:UserRegistrationView/>
         </Border>
     </Grid>
 </Page>
+

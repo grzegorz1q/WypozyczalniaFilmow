@@ -34,23 +34,11 @@
                   AlternatingRowBackground="AntiqueWhite"
                   RowBackground="White">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                <DataGridTextColumn Header="Tytuł" Binding="{Binding Title}" Width="150"/>
-                <DataGridTextColumn Header="Reżyser" Binding="{Binding Director}" Width="150"/>
-                <DataGridTextColumn Header="Kategoria" Binding="{Binding Category}" Width="150"/>
-                <DataGridTextColumn Header="Data premiery" Binding="{Binding ReleaseDate}" Width="120"/>
-                <DataGridTemplateColumn Header="Okładka" Width="150">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Cover}" 
-                                   Height="50" 
-                                   Width="50" 
-                                   Stretch="UniformToFill" 
-                                   Margin="5"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Ilość" Binding="{Binding Count}" Width="100"/>
+                <DataGridTextColumn Header="Tytuł" Binding="{Binding Title}" Width="2*"/>
+                <DataGridTextColumn Header="Reżyser" Binding="{Binding Director}" Width="2*"/>
+                <DataGridTextColumn Header="Kategoria" Binding="{Binding Category}" Width="2*"/>
+                <DataGridTextColumn Header="Data premiery" Binding="{Binding ReleaseDate}" Width="2*"/>
+                <DataGridTextColumn Header="Ilość" Binding="{Binding Count}" Width="2*"/>
             </DataGrid.Columns>
         </DataGrid>
 
