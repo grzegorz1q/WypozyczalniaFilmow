@@ -9,42 +9,59 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RentPageWindow">
     <Grid>
-
-        <Button Content="{Binding ContentText}" Command="{Binding ShowAddUserFormCommand}" HorizontalAlignment="Left" Margin="0,218,0,0" VerticalAlignment="Top"/>
-        <Grid Margin="0,250,550,0" Visibility="{Binding AddUserVisibility}">
-            <views:UserRegistrationView x:Name="UserForm" Height="200" DataContext="{Binding UserViewModel}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Label Content="Wybierz użytkownika" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <ComboBox ItemsSource="{Binding UserViewModel.Users}" SelectedItem="{Binding SelectedUser}" HorizontalAlignment="Left" Margin="6,30,0,0" VerticalAlignment="Top" Width="120">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding Surname}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </Grid>
-        <Label Content="Wybierz użytkownika" HorizontalAlignment="Left" Margin="11,38,0,0" VerticalAlignment="Top"/>
-        <ComboBox ItemsSource="{Binding UserViewModel.Users}" SelectedItem="{Binding SelectedUser}" HorizontalAlignment="Left" Margin="11,73,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text="{Binding Surname}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <Label Content="{Binding SelectedUserFilmsListLabel}" HorizontalAlignment="Left" Margin="421,20,0,0" VerticalAlignment="Top"/>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Label Content="Wybierz film" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+            <ComboBox ItemsSource="{Binding FilmViewModel.Films}" SelectedItem="{Binding SelectedFilm}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="6,30,0,0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Title}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Content="Wypożycz" Command="{Binding RentFilmCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,112,0,0" />
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
+            <Button Content="{Binding ContentText}" Command="{Binding ShowAddUserFormCommand}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <StackPanel Visibility="{Binding AddUserVisibility}">
+                <views:UserRegistrationView x:Name="UserForm" Height="200" Margin="0,30,0,0" DataContext="{Binding UserViewModel}"/>
+            </StackPanel>
+        </Grid>
 
-        <DataGrid ItemsSource="{Binding Rents}" AutoGenerateColumns="False" Grid.Row="0" IsReadOnly="True" Margin="400,53,0,0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Imię" Binding="{Binding Client.Name}" Width="50"/>
-                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Client.Surname}" Width="50"/>
-                <DataGridTextColumn Header="Tytuł filmu" Binding="{Binding Film.Title}" Width="150"/>
-                <DataGridTextColumn Header="Data wypożyczenia" Binding="{Binding RentDate}" Width="150"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Label Content="Wybierz film" HorizontalAlignment="Left" Margin="11,110,0,0" VerticalAlignment="Top"/>
-        <ComboBox ItemsSource="{Binding FilmViewModel.Films}" SelectedItem="{Binding SelectedFilm}" HorizontalAlignment="Left" Margin="11,145,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Title}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <Button Content="Wypożycz" Command="{Binding RentFilmCommand}" HorizontalAlignment="Left" Margin="168,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.222,0.17"/>
+        <Grid Grid.Row="1" Grid.ColumnSpan="4" Margin="10,0,0,0">
+            <Label Content="{Binding SelectedUserFilmsListLabel}" HorizontalAlignment="Left" Margin="0,20,0,0" VerticalAlignment="Top"/>
+            <DataGrid ItemsSource="{Binding Rents}" AutoGenerateColumns="False" Grid.Row="0" IsReadOnly="True" Margin="0,50,20,20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Imię" Binding="{Binding Client.Name}" Width="1*"/>
+                    <DataGridTextColumn Header="Nazwisko" Binding="{Binding Client.Surname}" Width="2*"/>
+                    <DataGridTextColumn Header="Tytuł filmu" Binding="{Binding Film.Title}" Width="2*"/>
+                    <DataGridTextColumn Header="Data wypożyczenia" Binding="{Binding RentDate}" Width="2*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Page>
