@@ -31,6 +31,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <Button Content="Wypożycz" Command="{Binding RentFilmCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,112,0,0" />
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <Label Content="Wybierz film" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
@@ -43,7 +44,6 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Content="Wypożycz" Command="{Binding RentFilmCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,112,0,0" />
         </Grid>
         <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
             <Button Content="{Binding ContentText}" Command="{Binding ShowAddUserFormCommand}" VerticalAlignment="Top" HorizontalAlignment="Left"/>

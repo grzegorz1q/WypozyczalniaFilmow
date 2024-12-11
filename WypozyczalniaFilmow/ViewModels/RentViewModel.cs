@@ -49,27 +49,34 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                var existingRent = context.Rents
-                    .FirstOrDefault(r => r.ClientId == this.SelectedUser.Id && r.FilmId == this.SelectedFilm.Id);
-
-                if (existingRent != null)
+                if (SelectedUser != null && SelectedFilm != null)
                 {
-                    MessageBox.Show("Ten użytkownik już wypożyczył ten film.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
+                    var existingRent = context.Rents
+                        .FirstOrDefault(r => r.ClientId == this.SelectedUser.Id && r.FilmId == this.SelectedFilm.Id);
+
+                    if (existingRent != null)
+                    {
+                        MessageBox.Show("Ten użytkownik już wypożyczył ten film.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                    var newRent = new Rent
+                    {
+                        ClientId = this.SelectedUser.Id,
+                        FilmId = this.SelectedFilm.Id
+                    };
+
+                    context.Rents.Add(newRent);
+                    context.SaveChanges();
+                    newRent.Client = this.SelectedUser;
+                    newRent.Film = this.SelectedFilm;
+                    Rents.Add(newRent);
+
+                    Debug.WriteLine($"Added rent: Client={newRent.Client?.Name}, Film={newRent.Film?.Title}");
                 }
-                var newRent = new Rent
+                else
                 {
-                    ClientId = this.SelectedUser.Id,
-                    FilmId = this.SelectedFilm.Id
-                };
-
-                context.Rents.Add(newRent);
-                context.SaveChanges();
-                newRent.Client = this.SelectedUser;
-                newRent.Film = this.SelectedFilm;
-                Rents.Add(newRent);
-            
-                Debug.WriteLine($"Added rent: Client={newRent.Client?.Name}, Film={newRent.Film?.Title}");
+                    MessageBox.Show("Musisz wybrać użytkownika i film do wypożyczenia", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
         }
 
