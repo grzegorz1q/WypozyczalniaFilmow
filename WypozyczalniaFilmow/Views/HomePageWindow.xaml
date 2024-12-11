@@ -21,7 +21,7 @@
                       Grid.Row="0" 
                       HorizontalScrollBarVisibility="Hidden" 
                       VerticalScrollBarVisibility="Disabled">
-            <ItemsControl ItemsSource="{Binding FilmViewModel.Films}" Margin="10">
+            <ItemsControl ItemsSource="{Binding FilmsList}" Margin="10">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>

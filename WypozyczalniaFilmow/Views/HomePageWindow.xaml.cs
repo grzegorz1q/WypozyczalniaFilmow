@@ -25,10 +25,6 @@ namespace WypozyczalniaFilmow.Views
         {
             InitializeComponent();
             DataContext = new HomeViewModel();
-            if (DataContext is HomeViewModel viewModel)
-            {
-                viewModel.FilmScrollViewer = FilmScrollViewer;
-            }
         }
     }
 }
