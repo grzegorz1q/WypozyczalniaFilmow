@@ -9,6 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RentPageWindow">
     <Grid>
+
         <Button Content="{Binding ContentText}" Command="{Binding ShowAddUserFormCommand}" HorizontalAlignment="Left" Margin="0,218,0,0" VerticalAlignment="Top"/>
         <Grid Margin="0,250,550,0" Visibility="{Binding AddUserVisibility}">
             <views:UserRegistrationView x:Name="UserForm" Height="200" DataContext="{Binding UserViewModel}"/>

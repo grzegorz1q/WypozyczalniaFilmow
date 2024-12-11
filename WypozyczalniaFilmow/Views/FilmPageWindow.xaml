@@ -9,22 +9,48 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FilmPageWindow">
 
-    <Grid Margin="0 50 0 0">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Films}" AutoGenerateColumns="False" Grid.Row="0" IsReadOnly="True">
+
+        <TextBlock Text="Lista filmów" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   Foreground="DarkGray" 
+                   Margin="0 0 0 10"
+                   Grid.Row="0" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"/>
+
+        <DataGrid ItemsSource="{Binding Films}" 
+                  AutoGenerateColumns="False" 
+                  Grid.Row="0" 
+                  Margin="0 40 0 10" 
+                  IsReadOnly="True"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  AlternatingRowBackground="AntiqueWhite"
+                  RowBackground="White">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                <DataGridTextColumn Header="Tytuł" Binding="{Binding Title}" Width="150"/>
-                <DataGridTextColumn Header="Reżyser" Binding="{Binding Director}" Width="150"/>
-                <DataGridTextColumn Header="Kategoria" Binding="{Binding Category}" Width="150"/>
-                <DataGridTextColumn Header="Data premiery" Binding="{Binding ReleaseDate}" Width="150"/>
-                <DataGridTextColumn Header="Okladka" Binding="{Binding Cover}" Width="150"/>
-                <DataGridTextColumn Header="Ilość" Binding="{Binding Count}" Width="150"/>
+                <DataGridTextColumn Header="Tytuł" Binding="{Binding Title}" Width="2*"/>
+                <DataGridTextColumn Header="Reżyser" Binding="{Binding Director}" Width="2*"/>
+                <DataGridTextColumn Header="Kategoria" Binding="{Binding Category}" Width="2*"/>
+                <DataGridTextColumn Header="Data premiery" Binding="{Binding ReleaseDate}" Width="2*"/>
+                <DataGridTextColumn Header="Ilość" Binding="{Binding Count}" Width="2*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <views:FilmRegistrationView Height="200"/>
+
+        <!-- Widok rejestracji filmów -->
+        <Border Grid.Row="1" 
+                Margin="0 10 0 0" 
+                Padding="10" 
+                Background="#f3f3f3" 
+                CornerRadius="5"
+                BorderBrush="#ddd" 
+                BorderThickness="1">
+            <views:FilmRegistrationView/>
+        </Border>
     </Grid>
 </Page>
