@@ -17,7 +17,6 @@
         <Style TargetType="TextBlock">
             <Setter Property="Padding" Value="2"/>
         </Style>
-
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="DarkSlateGray"/>
             <Setter Property="Foreground" Value="White"/>
@@ -34,8 +33,5 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
-
-
-
     </Application.Resources>
 </Application>
