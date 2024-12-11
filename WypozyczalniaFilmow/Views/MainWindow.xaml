@@ -29,7 +29,7 @@
                 </Menu.ItemsPanel>
 
                 <!-- Home -->
-                <MenuItem Header="Home" Foreground="white">
+                <MenuItem Header="Strona Główna" Foreground="white" Command="{Binding NavigateToHomePageCommand}">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/Styles/Assets/img_home.png" Stretch="Uniform"/>
                     </MenuItem.Icon>

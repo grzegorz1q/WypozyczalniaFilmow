@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
@@ -28,10 +29,25 @@ namespace WypozyczalniaFilmow.ViewModels
             LoadFilms();
             SubmitCommand = new RelayCommand(AddFilms);
             CancelCommand = new RelayCommand(ClearForm);
+            LoadImageCommand = new RelayCommand(LoadImage);
+        }
+
+        private void LoadImage()
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                Cover = dialog.FileName;
+            }
         }
 
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
+        public ICommand LoadImageCommand { get; }
 
         private void AddFilms()
         {
@@ -77,6 +93,7 @@ namespace WypozyczalniaFilmow.ViewModels
             Count = default!;
 
         }
+
 
         public string Title
         {
