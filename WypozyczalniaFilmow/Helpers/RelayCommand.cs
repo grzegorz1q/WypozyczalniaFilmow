@@ -10,8 +10,9 @@ namespace WypozyczalniaFilmow.Helpers
     public class RelayCommand : ICommand
     {
         private Action _execute;
-       // private  Func<bool> _canExecute;
-
+        // private  Func<bool> _canExecute;
+        private readonly Action<object?>? _executeWithParameter;
+        private readonly Func<bool>? _canExecute;
         public event EventHandler? CanExecuteChanged;
         public RelayCommand(Action execute)
         {
@@ -22,7 +23,10 @@ namespace WypozyczalniaFilmow.Helpers
                     _execute = execute;
                     _canExecute = canExecute;
                 }*/
-
+        public RelayCommand(Action<object?> executeWithParameter)
+        {
+            _executeWithParameter = executeWithParameter;
+        }
         public bool CanExecute(object? parameter)
         {
             return true;
@@ -30,7 +34,14 @@ namespace WypozyczalniaFilmow.Helpers
 
         public void Execute(object? parameter)
         {
-            _execute();
+            if (_execute != null)
+            {
+                _execute();
+            }
+            else if (_executeWithParameter != null)
+            {
+                _executeWithParameter(parameter);
+            }
         }
     }
 }

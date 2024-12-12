@@ -33,7 +33,7 @@
                 Grid.Row="0" 
                 Grid.Column="0"
                 Width="100"
-                Text="Name"/>
+                Text="Imię"/>
 
             <TextBox 
                 Grid.Row="1" 
@@ -46,7 +46,7 @@
                 Grid.Column="1" 
                 Width="100"
                 Margin="5 0 0 0 "
-                Text="Surname"/>
+                Text="Nazwisko"/>
 
             <TextBox 
                 Grid.Row="1" 
@@ -83,7 +83,7 @@
         Grid.Column="1" 
         Width="100"
         Margin="5 0 0 0 "
-        Text="PhoneNumber"/>
+        Text="Numer telefonu"/>
 
             <TextBox 
         Grid.Row="1" 

@@ -24,13 +24,17 @@
             <ItemsControl ItemsSource="{Binding FilmsList}" Margin="10">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="10" BorderBrush="Gray" BorderThickness="2" Padding="10" Margin="5" Background="LightGray">
+                        <Border Cursor="Hand" CornerRadius="10" BorderBrush="Gray" BorderThickness="2" Padding="10" Margin="5" Background="LightGray">
+                            <Border.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.NavigateToFilmDetailsCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                                                CommandParameter="{Binding}" />
+                            </Border.InputBindings>
                             <StackPanel Orientation="Vertical" Width="150">
                                 <Image Source="{Binding Cover}" Height="200" Stretch="UniformToFill" Margin="0,0,0,10"/>
                                 <TextBlock Text="{Binding Title}" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
