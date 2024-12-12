@@ -39,13 +39,6 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 var filmDetailsPage = new FilmDetailsViewModel
                 {
-                    /*Film = new Film
-                    {
-                        Title = selectedFilm.Title,
-                        Cover = selectedFilm.Cover,
-                        Description = selectedFilm.Description,
-                        Actors = new List<Actor> { new Actor {Name="Jan", Surname="Kowalski" } }
-                    }*/
                      Film = selectedFilm
                 };
                 var mainWindow = (Application.Current.MainWindow as MainWindow);
