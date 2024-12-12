@@ -19,17 +19,6 @@ namespace WypozyczalniaFilmow
             {
                 var seeder = new DatabaseSeeder(context);
                 seeder.Seed(); // Dodajemy dane do bazy
-                var films = context.Films.ToList();
-                foreach (var film in films)
-                {
-                    if (film.Title == "Skazani na Shawshank")
-                    {
-                        foreach (var actor in film.Actors)
-                        {
-                            Debug.WriteLine(actor.Name);
-                        }
-                    }
-                }
             }
         }
     }
