@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using WypozyczalniaFilmow.Database;
 using WypozyczalniaFilmow.Helpers;
 using WypozyczalniaFilmow.Models;
@@ -27,10 +28,12 @@ namespace WypozyczalniaFilmow.ViewModels
         public ObservableCollection<Rent> Rents { get; set; } = new ObservableCollection<Rent>();
         public ICommand ShowAddUserFormCommand { get; }
         public ICommand RentFilmCommand { get; }
+        public ICommand ReturnFilmCommand { get; }
         public RentViewModel()
         {
             ShowAddUserFormCommand = new RelayCommand(ShowUserRegistration);
             RentFilmCommand = new RelayCommand(RentFilm);
+            ReturnFilmCommand = new RelayCommand(ReturnFilm);
         }
         private void ShowUserRegistration()
         {
@@ -59,6 +62,20 @@ namespace WypozyczalniaFilmow.ViewModels
                         MessageBox.Show("Ten użytkownik już wypożyczył ten film.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
+                    var rentedFilm = context.Films.FirstOrDefault(f => f.Id == this.SelectedFilm.Id);
+                    if (rentedFilm == null)
+                    {
+                        MessageBox.Show("Wybrany film nie istnieje w bazie danych!");
+                        return;
+                    }
+                    if (rentedFilm.Count <= 0)
+                    {
+                        MessageBox.Show("Aktualnie ten film jest niedostępny!");
+                        return;
+                    }
+                    rentedFilm.Count--;
+                    
+                    context.Films.Update(rentedFilm);
                     var newRent = new Rent
                     {
                         ClientId = this.SelectedUser.Id,
@@ -76,6 +93,46 @@ namespace WypozyczalniaFilmow.ViewModels
                 else
                 {
                     MessageBox.Show("Musisz wybrać użytkownika i film do wypożyczenia", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+        }
+
+        private void ReturnFilm()
+        {
+            using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+            {
+                if (SelectedUser != null && SelectedFilm != null)
+                {
+                    var existingRent = context.Rents
+                        .FirstOrDefault(r => r.ClientId == this.SelectedUser.Id && r.FilmId == this.SelectedFilm.Id);
+
+                    if (existingRent == null)
+                    {
+                        MessageBox.Show("Ten użytkownik nie wypożyczał tego filmu.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                    var rentedFilm = context.Films.FirstOrDefault(f => f.Id == this.SelectedFilm.Id);
+                    if (rentedFilm == null)
+                    {
+                        MessageBox.Show("Wybrany film nie istnieje w bazie danych!");
+                        return;
+                    }
+
+                    rentedFilm.Count++;
+
+
+                    context.Rents.Remove(existingRent);
+                    context.SaveChanges();
+                    Rents.Remove(existingRent);
+                    if (SelectedUser != null)
+                    {
+                        LoadRents();
+                    }
+                    Debug.WriteLine($"Removed rent: Client={existingRent.Client?.Name}, Film={existingRent.Film?.Title}");
+                }
+                else
+                {
+                    MessageBox.Show("Musisz wybrać użytkownika i film do zwrotu", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }

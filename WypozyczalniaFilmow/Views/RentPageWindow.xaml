@@ -10,8 +10,8 @@
       Title="RentPageWindow">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -35,7 +35,7 @@
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <Label Content="Wybierz film" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-            <ComboBox ItemsSource="{Binding FilmViewModel.Films}" SelectedItem="{Binding SelectedFilm}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="6,30,0,0">
+            <ComboBox x:Name="ComboBoxFilms" ItemsSource="{Binding FilmViewModel.Films}" SelectedItem="{Binding SelectedFilm}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="6,30,0,0">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -44,6 +44,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <Button Content="Zwróć" Command="{Binding ReturnFilmCommand}" HorizontalAlignment="Left" Margin="6,112,0,0" VerticalAlignment="Top"/>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
             <Button Content="{Binding ContentText}" Command="{Binding ShowAddUserFormCommand}" VerticalAlignment="Top" HorizontalAlignment="Left"/>

@@ -4,14 +4,41 @@
              xmlns:local="clr-namespace:WypozyczalniaFilmow.Views" 
              StartupUri="Views\MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="Button">
+        <Style TargetType="Button" x:Key="SuccessButton">
             <Setter Property="Padding" Value="10 5"/>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="LightGreen"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="AntiqueWhite"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="DangerButton">
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Background" Value="Orange"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="AntiqueWhite"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="InfoButton">
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="AntiqueWhite"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Image" x:Key="FixedSizeImage">
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="500"/>
+            <Setter Property="Stretch" Value="UniformToFill"/>
+            <!-- Zapewnia, że obraz wypełnia cały obszar, ale nie jest zniekształcony -->
         </Style>
 
         <Style TargetType="TextBlock">

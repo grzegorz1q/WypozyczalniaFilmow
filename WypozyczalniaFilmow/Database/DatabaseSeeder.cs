@@ -36,8 +36,8 @@ namespace WypozyczalniaFilmow.Database
             {
                 var actors = _context.Persons.OfType<Actor>().ToList();
                 _context.Films.AddRange(
-                    new Film { Title = "Skazani na Shawshank", Actors = new List<Actor> { actors[0], actors[1] } },
-                    new Film { Title = "W pustyni i w puszczy"}
+                    new Film { Title = "Skazani na Shawshank", Actors = new List<Actor> { actors[0], actors[1] }, Count = 1 },
+                    new Film { Title = "W pustyni i w puszczy", Count = 1 }
                 );
                 _context.SaveChanges();
             }
