@@ -69,6 +69,12 @@
             <Setter Property="BorderBrush" Value="Gray"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="5"/>
+            <Style.Triggers>
+                <!-- Zmieniamy tło wiersza, kiedy jest wybrany -->
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Orange"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Application.Resources>
 </Application>

@@ -25,6 +25,7 @@
                    VerticalAlignment="Top"/>
 
         <DataGrid ItemsSource="{Binding Films}" 
+                  SelectedItem="{Binding SelectedFilm}"
                   AutoGenerateColumns="False" 
                   Grid.Row="0" 
                   Margin="0 40 0 10" 
