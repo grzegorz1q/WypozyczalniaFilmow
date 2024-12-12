@@ -17,7 +17,7 @@
 
         <TextBlock 
         Grid.Row="0"
-        Text="Dodaj Film"   
+        Text="{Binding FormTitle}"   
         FontSize="24" />
 
         <Grid Grid.Row="1">
@@ -152,8 +152,9 @@
 
 
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Button Style="{StaticResource SuccessButton}" Command="{Binding SubmitCommand}" Margin="0 5 0 0" Content="Submit"/>
-            <Button Style="{StaticResource DangerButton}" Command="{Binding CancelCommand}" Margin="5 5 0 0" Content="Cancel"/>
+            <Button Style="{StaticResource SuccessButton}" Command="{Binding SubmitCommand}" Margin="0 5 0 0" Content="Dodaj"/>
+            <Button Style="{StaticResource DangerButton}" Command="{Binding CancelCommand}" Margin="5 5 0 0" Content="Anuluj"/>
+            <Button Style="{StaticResource DeleteButton}" Command="{Binding DeleteFilmCommand}" Margin="5 5 0 0" Content="Usuń"/>
         </StackPanel>
     </Grid>
 </UserControl>

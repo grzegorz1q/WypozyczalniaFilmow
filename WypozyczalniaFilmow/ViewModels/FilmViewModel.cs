@@ -26,12 +26,21 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _description = string.Empty;
         private string _cover = string.Empty;
         private string _count = string.Empty;
+        private string _formTitle = "Dodaj Film";
+        private Film _selectedFilm;
+
+        public ICommand SubmitCommand { get; }
+        public ICommand CancelCommand { get; }
+        public ICommand LoadImageCommand { get; }
+        public ICommand DeleteFilmCommand { get; }
+
         public FilmViewModel()
         {
             LoadFilms();
             SubmitCommand = new RelayCommand(AddFilms);
             CancelCommand = new RelayCommand(ClearForm);
             LoadImageCommand = new RelayCommand(LoadImage);
+            DeleteFilmCommand = new RelayCommand(DeleteFilm);
         }
 
         private void LoadImage()
@@ -46,10 +55,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 Cover = dialog.FileName;
             }
         }
-
-        public ICommand SubmitCommand { get; }
-        public ICommand CancelCommand { get; }
-        public ICommand LoadImageCommand { get; }
 
         private void AddFilms()
         {
@@ -69,6 +74,22 @@ namespace WypozyczalniaFilmow.ViewModels
                 context.Films.Add(newFilm);
                 context.SaveChanges();
                 Films.Add(newFilm);
+            }
+        }
+        private void DeleteFilm()
+        {
+            using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+            {
+                // Debugowanie liczby użytkowników
+                var filmsFromDb = context.Films
+                    .Include(f => f.Actors)
+                    .ToList();
+                Console.WriteLine($"Liczba użytkowników w bazie: {filmsFromDb.Count}");
+
+                // Przypisanie do ObservableCollection
+                filmsFromDb.Remove(SelectedFilm);
+                context.SaveChanges();
+                Films.Remove(SelectedFilm);
             }
         }
         private void LoadFilms()
@@ -181,6 +202,31 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 _count = value;
                 OnPropertyChanged(nameof(Count));
+            }
+        }
+        public string FormTitle
+        {
+            get
+            {
+                return _formTitle;
+            }
+            set
+            {
+                _formTitle = value;
+                OnPropertyChanged(nameof(FormTitle));
+            }
+        }
+
+        public Film SelectedFilm
+        {
+            get
+            {
+                return _selectedFilm;
+            }
+            set
+            {
+                _selectedFilm = value;
+                OnPropertyChanged(nameof(SelectedFilm));
             }
         }
 
