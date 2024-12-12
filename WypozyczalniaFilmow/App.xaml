@@ -24,6 +24,16 @@
             </Style.Triggers>
         </Style>
 
+        <Style TargetType="Button" x:Key="DeleteButton">
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Background" Value="Crimson"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="AntiqueWhite"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style TargetType="Button" x:Key="InfoButton">
             <Setter Property="Padding" Value="10 5"/>
             <Setter Property="Background" Value="LightGray"/>

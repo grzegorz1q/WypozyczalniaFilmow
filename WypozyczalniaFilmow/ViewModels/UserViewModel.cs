@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,11 +28,13 @@ namespace WypozyczalniaFilmow.ViewModels
             LoadUsers();
             SubmitCommand = new RelayCommand(AddUser);
             CancelCommand = new RelayCommand(ClearForm);
+            DeleteUserCommand = new RelayCommand(DeleteUser);
             ClearForm();
         }
 
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
+        public ICommand DeleteUserCommand { get; }
 
         private string ValidateClient()
         {
@@ -56,7 +59,16 @@ namespace WypozyczalniaFilmow.ViewModels
 
             return string.Empty;
         }
-
+        private void DeleteUser()
+        {
+            using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+            {
+                var usersFromDb = context.Persons.OfType<Client>().ToList();
+                usersFromDb.Remove(SelectedUser);
+                context.SaveChanges();
+                Users.Remove(SelectedUser);
+            }
+        }
         private void AddUser()
         {
             var validationMessage = ValidateClient();
@@ -102,6 +114,17 @@ namespace WypozyczalniaFilmow.ViewModels
 
 
         //Gettery i Settery
+        private Client _selectedUser;
+        public Client SelectedUser
+        {
+            get => _selectedUser;
+            set
+            {
+                _selectedUser = value;
+                OnPropertyChanged(nameof(SelectedUser));
+            }
+        }
+
         public string Name
         {
             get
