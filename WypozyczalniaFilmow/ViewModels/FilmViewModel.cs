@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -74,7 +75,9 @@ namespace WypozyczalniaFilmow.ViewModels
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
                 // Debugowanie liczby użytkowników
-                var filmsFromDb = context.Films.ToList();
+                var filmsFromDb = context.Films
+                    .Include(f => f.Actors)
+                    .ToList();
                 Console.WriteLine($"Liczba użytkowników w bazie: {filmsFromDb.Count}");
 
                 // Przypisanie do ObservableCollection

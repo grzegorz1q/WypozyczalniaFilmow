@@ -51,6 +51,9 @@ namespace WypozyczalniaFilmow.Database
             modelBuilder.Entity<Actor>()
                 .HasMany(f => f.Films)
                 .WithMany(a => a.Actors);
+           /* modelBuilder.Entity<Film>()
+                .HasMany(a => a.Actors)
+                .WithMany(f => f.Films);*/
 
             modelBuilder.Entity<Rent>()
                 .HasKey(d => new { d.ClientId, d.FilmId });

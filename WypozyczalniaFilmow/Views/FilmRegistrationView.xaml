@@ -129,7 +129,7 @@
                 Width="100"
                 Grid.Row="1" 
                 Grid.Column="2" 
-                Content="Dodaj okładkę" 
+                Content="Load Image" 
                 Command="{Binding LoadImageCommand}" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Bottom"/>

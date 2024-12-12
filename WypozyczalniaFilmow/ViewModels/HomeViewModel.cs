@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,47 +20,56 @@ namespace WypozyczalniaFilmow.ViewModels
     public class HomeViewModel : ObservableObject
     {
         public FilmViewModel FilmViewModel { get; set; } = new FilmViewModel();
-        public ObservableCollection<Film> FilmsList { get; set; } = new ObservableCollection<Film> { };
+        public ObservableCollection<Film> FilmsList { get; set; } = new ObservableCollection<Film>();
         public ICommand ScrollLeftCommand { get; }
         public ICommand ScrollRightCommand { get; }
         public ICommand NavigateToFilmDetailsCommand { get; }
+
         public HomeViewModel()
         {
             ScrollLeftCommand = new RelayCommand(ScrollLeft);
             ScrollRightCommand = new RelayCommand(ScrollRight);
             NavigateToFilmDetailsCommand = new RelayCommand(NavigateToFilmDetailsPage);
-            GetFilm(0,3);
+            GetFilm(0, 3);
         }
-        private void NavigateToFilmDetailsPage()
+        private void NavigateToFilmDetailsPage(object parameter)
         {
-            /*if (selectedFilm != null)
+            var selectedFilm = parameter as Film;
+            if (selectedFilm != null)
             {
-                // Tworzenie nowego widoku szczegółów i przekazanie danych
-                var detailsViewModel = new FilmDetailsViewModel
+                var filmDetailsPage = new FilmDetailsViewModel
                 {
-                    FilmViewModel = new FilmViewModel
+                    /*Film = new Film
                     {
                         Title = selectedFilm.Title,
                         Cover = selectedFilm.Cover,
-                        // Dodaj inne właściwości, jeśli potrzebne
-                    }
-                };*/
+                        Description = selectedFilm.Description,
+                        Actors = new List<Actor> { new Actor {Name="Jan", Surname="Kowalski" } }
+                    }*/
+                     Film = selectedFilm
+                };
                 var mainWindow = (Application.Current.MainWindow as MainWindow);
-                mainWindow?.MainFrame.Navigate(new FilmDetailsPageWindow());
-            //}
+                mainWindow?.MainFrame.Navigate(new FilmDetailsPageWindow { DataContext = filmDetailsPage });
+            }
         }
+
+        int lastIndex = 0;
         private void GetFilm(int startIndex, int endIndex)
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                var allFilms = context.Films.ToList();
-                var filmsFromDb = allFilms
-                    .Skip(startIndex)            
-                    .Take(endIndex - startIndex)  
+                var allFilms = context.Films
+                    .Include(f => f.Actors)
+                    .ToList();
+                var threeFilms = allFilms
+                    .Skip(startIndex)
+                    .Take(endIndex - startIndex)
                     .ToList();
 
+                lastIndex = allFilms.Count - 1;
+
                 FilmsList.Clear();
-                foreach (var film in filmsFromDb)
+                foreach (var film in threeFilms)
                 {
                     FilmsList.Add(film);
                 }
@@ -80,7 +91,7 @@ namespace WypozyczalniaFilmow.ViewModels
         private void ScrollRight()
         {
 
-            if (FilmViewModel.Films.Any())
+            if (FilmViewModel.Films.Any() && endIndex<=lastIndex)
             {
                 startIndex++;
                 endIndex++;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +26,17 @@ namespace WypozyczalniaFilmow.Database
                 _context.Persons.AddRange(
                     new Client { Name = "Jan", Surname = "Kowalski", Email = "jan@jan.pl", PhoneNumber = 123456789 },
                     new Client { Name = "Kamila", Surname = "Nowak", Email = "kamila@nowak.pl", PhoneNumber = 123321432 },
-                    new Actor { Name = "Adam", Surname = "Nowak" }
+                    new Actor { Name = "Tim", Surname = "Robbins" },
+                    new Actor { Name= "Morgan", Surname = "Freeman"}
                 );
 
                 _context.SaveChanges(); // Zapisujemy zmiany w bazie
             }
             if(!_context.Films.Any())
             {
+                var actors = _context.Persons.OfType<Actor>().ToList();
                 _context.Films.AddRange(
-                    new Film { Title = "Skazani na Shawshank"},
+                    new Film { Title = "Skazani na Shawshank", Actors = new List<Actor> { actors[0], actors[1] } },
                     new Film { Title = "W pustyni i w puszczy"}
                 );
                 _context.SaveChanges();
