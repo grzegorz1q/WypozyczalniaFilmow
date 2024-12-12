@@ -21,7 +21,7 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _title = string.Empty;
         private string _director = string.Empty;
         private string _category = string.Empty;
-        private DateTime _releasedate = default!;
+        private DateOnly _releasedate = default!;
         private string _description = string.Empty;
         private string _cover = string.Empty;
         private int _count;
@@ -134,7 +134,7 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Category));
             }
         }
-        public DateTime ReleaseDate
+        public DateOnly ReleaseDate
         {
             get
             {
