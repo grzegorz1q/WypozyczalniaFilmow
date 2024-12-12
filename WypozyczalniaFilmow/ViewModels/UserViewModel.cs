@@ -21,7 +21,7 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _name = string.Empty!;
         private string _surname = string.Empty!;
         private string _email = string.Empty!;
-        private int _phonenumber;
+        private string _phonenumber = string.Empty;
         public UserViewModel()
         {
             LoadUsers();
@@ -40,7 +40,7 @@ namespace WypozyczalniaFilmow.ViewModels
                 Name = this.Name,
                 Surname = this.Surname,
                 Email = this.Email,
-                PhoneNumber = this.PhoneNumber
+                PhoneNumber = int.Parse(this.PhoneNumber)
             };
 
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
@@ -73,7 +73,7 @@ namespace WypozyczalniaFilmow.ViewModels
                     Name = this.Name,
                     Surname = this.Surname,
                     Email = this.Email,
-                    PhoneNumber = this.PhoneNumber
+                    PhoneNumber = int.Parse(this.PhoneNumber)
                 };
 
                 context.Persons.Add(newUser);
@@ -97,7 +97,7 @@ namespace WypozyczalniaFilmow.ViewModels
             Name = string.Empty;
             Surname = string.Empty;
             Email = string.Empty;
-            PhoneNumber = 0;
+            PhoneNumber = string.Empty;
         }
 
 
@@ -138,7 +138,7 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Email));
             }
         }
-        public int PhoneNumber
+        public string PhoneNumber
         {
             get
             {

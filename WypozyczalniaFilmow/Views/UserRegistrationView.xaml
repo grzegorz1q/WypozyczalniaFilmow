@@ -70,7 +70,7 @@
         Grid.Row="0" 
         Grid.Column="0"
         Width="100"
-        Text="Eamil"/>
+        Text="Email"/>
 
             <TextBox 
         Grid.Row="1" 
