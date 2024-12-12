@@ -25,6 +25,7 @@
                    VerticalAlignment="Top"/>
 
         <DataGrid ItemsSource="{Binding Users}" 
+                  SelectedItem="{Binding SelectedUser}"
                   AutoGenerateColumns="False" 
                   Grid.Row="0" 
                   Margin="0 40 0 10" 
