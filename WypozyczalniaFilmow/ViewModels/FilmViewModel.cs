@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using WypozyczalniaFilmow.Database;
 using WypozyczalniaFilmow.Helpers;
 using WypozyczalniaFilmow.Models;
+using WypozyczalniaFilmow.Views;
 
 namespace WypozyczalniaFilmow.ViewModels
 {
@@ -24,7 +25,7 @@ namespace WypozyczalniaFilmow.ViewModels
         private DateOnly _releasedate = default!;
         private string _description = string.Empty;
         private string _cover = string.Empty;
-        private int _count;
+        private string _count = string.Empty;
         public FilmViewModel()
         {
             LoadFilms();
@@ -62,7 +63,7 @@ namespace WypozyczalniaFilmow.ViewModels
                     ReleaseDate = this.ReleaseDate,
                     Description = this.Description,
                     Cover = this.Cover,
-                    Count = this.Count,
+                    Count = int.Parse(this.Count),
                 };
 
                 context.Films.Add(newFilm);
@@ -93,7 +94,7 @@ namespace WypozyczalniaFilmow.ViewModels
             ReleaseDate = default!;
             Description = string.Empty;
             Cover = string.Empty;
-            Count = default!;
+            Count = string.Empty;
 
         }
 
@@ -170,7 +171,7 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Cover));
             }
         }
-        public int Count
+        public string Count
         {
             get
             {
