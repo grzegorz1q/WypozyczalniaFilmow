@@ -70,7 +70,6 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 // Debugowanie liczby użytkowników
                 var actorsFromDb = context.Persons.OfType<Actor>()
-                    .Include(a=>a.Films)
                     .ToList();
 
                 // Przypisanie do ObservableCollection
@@ -81,8 +80,52 @@ namespace WypozyczalniaFilmow.ViewModels
 
         private void AddFilms()
         {
+            /* using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+             {
+                 var newFilm = new Film
+                 {
+                     Title = this.Title,
+                     Director = this.Director,
+                     Category = this.Category,
+                     ReleaseDate = this.ReleaseDate,
+                     Description = this.Description,
+                     Cover = this.Cover,
+                     Count = this.Count,
+                     Actors = NewActors
+                 };
+
+
+                 context.Films.Add(newFilm);
+                 context.SaveChanges();
+                 Films.Add(newFilm);
+                 ClearForm();
+                 NewActors.Clear();
+             }*/
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
+                // Lista aktorów do dodania do filmu
+                var filmActors = new List<Actor>();
+
+                foreach (var actor in NewActors)
+                {
+                    // Sprawdź, czy aktor już istnieje w bazie
+                    var existingActor = context.Actors
+                        .FirstOrDefault(a => a.Name == actor.Name && a.Surname == actor.Surname);
+
+                    if (existingActor != null)
+                    {
+                        // Dodaj istniejącego aktora
+                        filmActors.Add(existingActor);
+                    }
+                    else
+                    {
+                        // Dodaj nowego aktora
+                        filmActors.Add(actor);
+                        context.Actors.Add(actor);
+                    }
+                }
+
+                // Utwórz nowy film z aktorami
                 var newFilm = new Film
                 {
                     Title = this.Title,
@@ -92,12 +135,17 @@ namespace WypozyczalniaFilmow.ViewModels
                     Description = this.Description,
                     Cover = this.Cover,
                     Count = this.Count,
-                    Actors = new List<Actor>(NewActors)
+                    Actors = filmActors
                 };
 
+                // Dodaj film do bazy
                 context.Films.Add(newFilm);
                 context.SaveChanges();
+
+                // Dodaj film do kolekcji
                 Films.Add(newFilm);
+
+                // Wyczyść formularz
                 ClearForm();
                 NewActors.Clear();
             }
@@ -107,13 +155,19 @@ namespace WypozyczalniaFilmow.ViewModels
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
                 // Debugowanie liczby użytkowników
-                var filmsFromDb = context.Films
-                    .Include(f => f.Actors)
-                    .ToList();
-                Console.WriteLine($"Liczba użytkowników w bazie: {filmsFromDb.Count}");
+                if (SelectedFilm == null)
+                {
+                    MessageBox.Show("Musisz wybrać użytkownika z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                var selectedUser = context.Films.FirstOrDefault(u => u.Id == SelectedFilm.Id);
+                if (selectedUser == null)
+                {
+                    MessageBox.Show("Wybrany użytkownik nie istnieje w bazie danych!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
 
-                // Przypisanie do ObservableCollection
-                filmsFromDb.Remove(SelectedFilm);
+                context.Films.Remove(selectedUser);
                 context.SaveChanges();
                 Films.Remove(SelectedFilm);
             }
@@ -124,7 +178,7 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 // Debugowanie liczby użytkowników
                 var filmsFromDb = context.Films
-                    .Include(f => f.Actors)
+                    //.Include(f => f.Actors)
                     .ToList();
                 Console.WriteLine($"Liczba użytkowników w bazie: {filmsFromDb.Count}");
 
