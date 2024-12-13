@@ -10,10 +10,18 @@
       Title="FilmPageWindow">
 
     <Grid Margin="10">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
         <TextBlock Text="Lista filmów" 
                    FontSize="20" 
@@ -28,6 +36,7 @@
                   SelectedItem="{Binding SelectedFilm}"
                   AutoGenerateColumns="False" 
                   Grid.Row="0" 
+                  Grid.ColumnSpan="5" 
                   Margin="0 40 0 10" 
                   IsReadOnly="True"
                   VerticalAlignment="Stretch"
@@ -44,7 +53,8 @@
         </DataGrid>
 
         <!-- Widok rejestracji filmów -->
-        <Border Grid.Row="1" 
+        <Border Grid.Row="1"
+                Grid.ColumnSpan="3"
                 Margin="0 10 0 0" 
                 Padding="10" 
                 Background="#f3f3f3" 
@@ -53,5 +63,7 @@
                 BorderThickness="1">
             <views:FilmRegistrationView/>
         </Border>
+        <Button Grid.Row="1" Grid.Column="3" VerticalAlignment="Top" Margin="5 20 5 0" Style="{StaticResource DeleteButton}" Command="{Binding DeleteFilmCommand}" Content="Usuń film"/>
+        <Button Grid.Row="1" Grid.Column="4" VerticalAlignment="Top" Margin="5 20 5 0" Style="{StaticResource DangerButton}" Command="{Binding EditFilmCommand}" Content="Edytuj film"/>
     </Grid>
 </Page>

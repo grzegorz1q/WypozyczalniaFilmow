@@ -19,6 +19,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Lista użytkowników" 
@@ -34,7 +35,7 @@
                   SelectedItem="{Binding SelectedUser}"
                   AutoGenerateColumns="False" 
                   Grid.Row="0" 
-                  Grid.ColumnSpan="4"
+                  Grid.ColumnSpan="5"
                   Margin="0 40 0 10" 
                   IsReadOnly="True"
                   VerticalAlignment="Stretch"
@@ -61,8 +62,8 @@
                 BorderThickness="1">
             <views:UserRegistrationView/>
         </Border>
-        <Button Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Margin="10 10 0 0" Style="{StaticResource DeleteButton}" Command="{Binding DeleteUserCommand}" Content="Usuń użytkownika"/>
-        <Button Grid.Row="2" Grid.Column="3" VerticalAlignment="Top" Margin="10 10 10 0" Style="{StaticResource DangerButton}" Command = "{Binding EditCommand}"  Content="Edytuj użytkownika"/>
+        <Button Grid.Row="1" Grid.Column="3" VerticalAlignment="Top" Margin="10 10 0 0" Style="{StaticResource DeleteButton}" Command="{Binding DeleteUserCommand}" Content="Usuń użytkownika"/>
+        <Button Grid.Row="2" Grid.Column="4" VerticalAlignment="Top" Margin="10 10 10 0" Style="{StaticResource DangerButton}" Command = "{Binding EditCommand}"  Content="Edytuj użytkownika"/>
     </Grid>
 </Page>
 
