@@ -96,7 +96,6 @@
         <StackPanel Grid.Row= "3" Orientation="Horizontal">
             <Button Style="{StaticResource SuccessButton}" Command = "{Binding SubmitCommand}" Margin="0 5 0 0" Content="Submit"/>
             <Button Style="{StaticResource DangerButton}" Command = "{Binding CancelCommand}" Margin="5 5 0 0" Content="Cancel"/>
-            <Button Style="{StaticResource DeleteButton}" Command="{Binding DeleteUserCommand}" Content="Usuń użytkownika" Margin="5 5 0 0"/>
         </StackPanel>
     </Grid>
 </UserControl>

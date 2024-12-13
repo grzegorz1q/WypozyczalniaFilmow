@@ -19,7 +19,7 @@ namespace WypozyczalniaFilmow.Models
         public DateOnly ReleaseDate { get; set; }
         public string? Description { get; set; }
         public string? Cover { get; set; }
-        public int Count { get; set; }
+        public int? Count { get; set; }
         public virtual ICollection<Rent> Rents { get; set; }
        // public virtual ICollection<ActorFilm> ActorFilms { get; set; }
         public virtual ICollection<Actor> Actors { get; set; }

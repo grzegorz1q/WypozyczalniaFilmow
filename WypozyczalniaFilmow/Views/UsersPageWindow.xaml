@@ -14,6 +14,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
         <TextBlock Text="Lista użytkowników" 
                    FontSize="20" 
@@ -28,6 +34,7 @@
                   SelectedItem="{Binding SelectedUser}"
                   AutoGenerateColumns="False" 
                   Grid.Row="0" 
+                  Grid.ColumnSpan="4"
                   Margin="0 40 0 10" 
                   IsReadOnly="True"
                   VerticalAlignment="Stretch"
@@ -35,6 +42,7 @@
                   AlternatingRowBackground="AntiqueWhite"
                   RowBackground="White">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="2*"/>
                 <DataGridTextColumn Header="Imię" Binding="{Binding Name}" Width="2*"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" Width="2*"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="2*"/>
@@ -44,6 +52,7 @@
 
         <!-- Widok rejestracji użytkowników -->
         <Border Grid.Row="1" 
+                Grid.ColumnSpan="2"
                 Margin="0 10 0 0" 
                 Padding="10" 
                 Background="#f3f3f3" 
@@ -52,6 +61,7 @@
                 BorderThickness="1">
             <views:UserRegistrationView/>
         </Border>
+        <Button Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Margin="10 10 0 0" Style="{StaticResource DeleteButton}" Command="{Binding DeleteUserCommand}" Content="Usuń użytkownika"/>
     </Grid>
 </Page>
 

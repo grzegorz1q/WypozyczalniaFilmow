@@ -22,7 +22,8 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _name = string.Empty!;
         private string _surname = string.Empty!;
         private string _email = string.Empty!;
-        private string _phonenumber = string.Empty;
+        private int? _phonenumber;
+        private Client _selectedUser = default!;
         public UserViewModel()
         {
             LoadUsers();
@@ -38,12 +39,13 @@ namespace WypozyczalniaFilmow.ViewModels
 
         private string ValidateClient()
         {
+            
             var client = new Client
             {
                 Name = this.Name,
                 Surname = this.Surname,
                 Email = this.Email,
-                PhoneNumber = int.Parse(this.PhoneNumber)
+                PhoneNumber = this.PhoneNumber
             };
 
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
@@ -63,8 +65,19 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                var usersFromDb = context.Persons.OfType<Client>().ToList();
-                usersFromDb.Remove(SelectedUser);
+                if (SelectedUser == null)
+                {
+                    MessageBox.Show("Musisz wybrać użytkownika z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                var selectedUser = context.Persons.FirstOrDefault(u => u.Id == SelectedUser.Id);
+                if (selectedUser == null)
+                {
+                    MessageBox.Show("Wybrany użytkownik nie istnieje w bazie danych!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                context.Persons.Remove(selectedUser);
                 context.SaveChanges();
                 Users.Remove(SelectedUser);
             }
@@ -85,7 +98,7 @@ namespace WypozyczalniaFilmow.ViewModels
                     Name = this.Name,
                     Surname = this.Surname,
                     Email = this.Email,
-                    PhoneNumber = int.Parse(this.PhoneNumber)
+                    PhoneNumber = this.PhoneNumber
                 };
 
                 context.Persons.Add(newUser);
@@ -109,12 +122,11 @@ namespace WypozyczalniaFilmow.ViewModels
             Name = string.Empty;
             Surname = string.Empty;
             Email = string.Empty;
-            PhoneNumber = string.Empty;
+            PhoneNumber = null;
         }
 
 
         //Gettery i Settery
-        private Client _selectedUser;
         public Client SelectedUser
         {
             get => _selectedUser;
@@ -161,7 +173,7 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Email));
             }
         }
-        public string PhoneNumber
+        public int? PhoneNumber
         {
             get
             {

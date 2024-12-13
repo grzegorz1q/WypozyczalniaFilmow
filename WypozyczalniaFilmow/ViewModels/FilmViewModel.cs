@@ -25,7 +25,7 @@ namespace WypozyczalniaFilmow.ViewModels
         private DateOnly _releasedate = default!;
         private string _description = string.Empty;
         private string _cover = string.Empty;
-        private string _count = string.Empty;
+        private int? _count;
         private string _formTitle = "Dodaj Film";
         private Film _selectedFilm;
 
@@ -68,7 +68,7 @@ namespace WypozyczalniaFilmow.ViewModels
                     ReleaseDate = this.ReleaseDate,
                     Description = this.Description,
                     Cover = this.Cover,
-                    Count = int.Parse(this.Count),
+                    Count = this.Count
                 };
 
                 context.Films.Add(newFilm);
@@ -115,7 +115,7 @@ namespace WypozyczalniaFilmow.ViewModels
             ReleaseDate = default!;
             Description = string.Empty;
             Cover = string.Empty;
-            Count = string.Empty;
+            Count = null;
 
         }
 
@@ -192,7 +192,7 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Cover));
             }
         }
-        public string Count
+        public int? Count
         {
             get
             {
@@ -232,4 +232,3 @@ namespace WypozyczalniaFilmow.ViewModels
 
     }
 }
-

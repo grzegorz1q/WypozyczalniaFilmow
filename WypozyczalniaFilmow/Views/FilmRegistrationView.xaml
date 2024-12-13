@@ -7,154 +7,174 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="5 0 0 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock 
         Grid.Row="0"
+        Grid.ColumnSpan="2"
         Text="{Binding FormTitle}"   
         FontSize="24" />
 
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock
-            Grid.Row="0" 
+        <TextBlock
+            Grid.Row="1" 
             Grid.Column="0"
-            Width="100"
+            HorizontalAlignment="Left"
             Text="Tytuł"/>
 
-            <TextBox 
-            Grid.Row="1" 
-            Grid.Column="0" 
-            Margin="0 5 0 0 "
+        <TextBox 
+            Grid.Row="2" 
+            Grid.Column="0"
+            Margin="0 3 3 0"
             Text="{Binding Title}" />
 
-            <TextBlock 
-            Grid.Row="0" 
+        <TextBlock 
+            Grid.Row="1" 
             Grid.Column="1" 
-            Width="100"
-            Margin="5 0 0 0 "
+            HorizontalAlignment="Left"
             Text="Reżyser"/>
 
-            <TextBox 
-            Grid.Row="1" 
+        <TextBox 
+            Grid.Row="2" 
             Grid.Column="1" 
-            Margin="5 5 0 0 "
+            Margin="0 3 3 0"
             Text="{Binding Director}" />
-
-        </Grid>
-
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock
-            Grid.Row="0" 
-            Grid.Column="0"
-            Width="100"
-            Text="Kategoria"/>
-
-            <TextBox 
+    
+        <TextBlock
             Grid.Row="1" 
-            Grid.Column="0" 
-            Margin="0 5 0 0 "
+            Grid.Column="2"
+            HorizontalAlignment="Left"
+            Text="Kategoria"/>
+        <TextBox 
+            Grid.Row="2" 
+            Grid.Column="2" 
+            Margin="0 3 3 0"
             Text="{Binding Category}" />
 
-            <TextBlock 
-            Grid.Row="0" 
-            Grid.Column="1" 
-            Width="100"
-            Margin="5 0 0 0 "
+        <TextBlock 
+            Grid.Row="3" 
+            Grid.Column="0" 
+            HorizontalAlignment="Left"
             Text="Data premiery"/>
-
-            <TextBox 
-            Grid.Row="1" 
-            Grid.Column="1" 
-            Margin="5 5 0 0 "
+        <TextBox 
+            Grid.Row="4" 
+            Grid.Column="0" 
+            Margin="0 3 3 0"
             Text="{Binding ReleaseDate}" />
 
-        </Grid>
-
-        <Grid Grid.Row="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock
-            Grid.Row="0" 
-            Grid.Column="0"
-            Width="100"
+        <TextBlock
+            Grid.Row="3" 
+            Grid.Column="1"
+            HorizontalAlignment="Left"
             Text="Opis"/>
-
-            <TextBox 
-            Grid.Row="1" 
-            Grid.Column="0" 
-            Margin="0 5 0 0 "
+        <TextBox 
+            Grid.Row="4" 
+            Grid.Column="1" 
+            Margin="0 3 3 0"
             Text="{Binding Description}" />
 
-            <TextBlock 
-            Grid.Row="0" 
+        <TextBlock 
+            Grid.Row="3" 
             Grid.Column="2" 
             Width="100"
             Margin="5 0 0 0 "
             Text="Okładka"/>
-
-            <Button 
-                Margin="0 5 0 0 "
-                Width="100"
-                Grid.Row="1" 
+        <Button 
+                Grid.Row="4" 
                 Grid.Column="2" 
-                Content="Load Image" 
-                Command="{Binding LoadImageCommand}" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Bottom"/>
+            Margin="0 3 3 0"
+                Content="Dodaj okładkę" 
+                Command="{Binding LoadImageCommand}" />
 
-            <TextBlock 
-            Grid.Row="0" 
-            Grid.Column="1" 
-            Width="40"
-            Margin="-50 0 0 0 "
+        <TextBlock 
+            Grid.Row="3" 
+            Grid.Column="3" 
+            HorizontalAlignment="Left"
             Text="Ilość"/>
-
-            <TextBox 
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="100"
-            Margin="5 5 5 0 "
+        <TextBox 
+            Grid.Row="4"
+            Grid.Column="3"
+            Margin="0 3 3 0"
             Text="{Binding Count}" />
+        
+        <TextBlock 
+            Grid.Row="5" 
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Left"
+            FontSize="16"
+            Text="Nowi aktorzy"/>
+        <TextBlock 
+            Grid.Row="6" 
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            Text="Imię"/>
+        <TextBox 
+            Grid.Row="7"
+            Grid.Column="0"
+            Margin="0 3 3 0"
+            Text="{Binding ActorName}" />
+        <TextBlock 
+            Grid.Row="6" 
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            Text="Nazwisko"/>
+        <TextBox 
+            Grid.Row="7"
+            Grid.Column="1"
+            Margin="0 3 3 0"
+            Text="{Binding ActorSurname}" />
+        <ComboBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ComboBoxActors" ItemsSource="{Binding AllActors}" SelectedItem="{Binding SelectedActor}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Surname}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Grid.Row="7" Grid.RowSpan="2" Grid.Column="2" Margin="3 3 3 0" Content="Dodaj aktora" Command="{Binding AddActorCommand}" />
+        <ListView Grid.Row="7" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" ItemsSource="{Binding NewActors}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Surname}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-        </Grid>
-
-
-        <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Button Style="{StaticResource SuccessButton}" Command="{Binding SubmitCommand}" Margin="0 5 0 0" Content="Dodaj"/>
-            <Button Style="{StaticResource DangerButton}" Command="{Binding CancelCommand}" Margin="5 5 0 0" Content="Anuluj"/>
-            <Button Style="{StaticResource DeleteButton}" Command="{Binding DeleteFilmCommand}" Margin="5 5 0 0" Content="Usuń"/>
-        </StackPanel>
+        <Button Grid.Row="9" Grid.Column="0" Margin="0 3 3 0" Style="{StaticResource SuccessButton}" Command="{Binding SubmitCommand}" Content="Dodaj"/>
+        <Button Grid.Row="9" Grid.Column="1" Margin="0 3 3 0" Style="{StaticResource DangerButton}" Command="{Binding CancelCommand}" Content="Anuluj"/>
+        <Button Grid.Row="0" Grid.Column="10" Style="{StaticResource DeleteButton}" Command="{Binding DeleteFilmCommand}" Content="Usuń film"/>
+        <Button Grid.Row="0" Grid.Column="11" Margin="3 0 0 0" Style="{StaticResource DangerButton}" Command="{Binding EditFilmCommand}" Content="Edytuj film"/>
     </Grid>
 </UserControl>
