@@ -19,6 +19,8 @@ namespace WypozyczalniaFilmow.ViewModels
     public class FilmViewModel : ObservableObject
     {
         public ObservableCollection<Film> Films { get; set; } = default!;
+        public ObservableCollection<Actor> NewActors { get; set; } = new ObservableCollection<Actor> { };
+        public ObservableCollection<Actor> AllActors { get; set; } = new ObservableCollection<Actor> { };
         private string _title = string.Empty;
         private string _director = string.Empty;
         private string _category = string.Empty;
@@ -37,6 +39,7 @@ namespace WypozyczalniaFilmow.ViewModels
         public FilmViewModel()
         {
             LoadFilms();
+            LoadActors();
             SubmitCommand = new RelayCommand(AddFilms);
             CancelCommand = new RelayCommand(ClearForm);
             LoadImageCommand = new RelayCommand(LoadImage);
@@ -53,6 +56,18 @@ namespace WypozyczalniaFilmow.ViewModels
             if (dialog.ShowDialog() == true)
             {
                 Cover = dialog.FileName;
+            }
+        }
+        private void LoadActors()
+        {
+            using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+            {
+                // Debugowanie liczby użytkowników
+                var actorsFromDb = context.Persons.OfType<Actor>()
+                    .ToList();
+
+                // Przypisanie do ObservableCollection
+                AllActors = new ObservableCollection<Actor>(actorsFromDb);
             }
         }
 
