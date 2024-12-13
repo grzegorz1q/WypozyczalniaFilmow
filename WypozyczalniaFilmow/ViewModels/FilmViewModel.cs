@@ -7,6 +7,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using WypozyczalniaFilmow.Database;
@@ -21,6 +22,8 @@ namespace WypozyczalniaFilmow.ViewModels
         public ObservableCollection<Film> Films { get; set; } = default!;
         public ObservableCollection<Actor> NewActors { get; set; } = new ObservableCollection<Actor> { };
         public ObservableCollection<Actor> AllActors { get; set; } = new ObservableCollection<Actor> { };
+        private string _actorName = string.Empty;
+        private string _actorSurname = string.Empty;
         private string _title = string.Empty;
         private string _director = string.Empty;
         private string _category = string.Empty;
@@ -29,12 +32,14 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _cover = string.Empty;
         private int? _count;
         private string _formTitle = "Dodaj Film";
-        private Film _selectedFilm;
+        private Film _selectedFilm = default!;
+        private Actor _selectedActor = default!;
 
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
         public ICommand LoadImageCommand { get; }
         public ICommand DeleteFilmCommand { get; }
+        public ICommand AddActorCommand { get; }
 
         public FilmViewModel()
         {
@@ -44,6 +49,7 @@ namespace WypozyczalniaFilmow.ViewModels
             CancelCommand = new RelayCommand(ClearForm);
             LoadImageCommand = new RelayCommand(LoadImage);
             DeleteFilmCommand = new RelayCommand(DeleteFilm);
+            AddActorCommand = new RelayCommand(AddActorsToFilm);
         }
 
         private void LoadImage()
@@ -120,6 +126,16 @@ namespace WypozyczalniaFilmow.ViewModels
                 // Przypisanie do ObservableCollection
                 Films = new ObservableCollection<Film>(filmsFromDb);
             }
+        }
+
+        private void AddActorsToFilm()
+        {
+            if(ActorName == null && ActorSurname == null && SelectedActor == null)
+            {
+                MessageBox.Show("Musisz wybrać aktora do dodania.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
         }
 
         private void ClearForm()
@@ -231,6 +247,29 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(FormTitle));
             }
         }
+        public string ActorName
+        {
+            get
+            {
+                return _actorName;
+            }
+            set
+            {
+                _actorName = value;
+                OnPropertyChanged(nameof(ActorName));
+            }
+        }public string ActorSurname
+        {
+            get
+            {
+                return _actorSurname;
+            }
+            set
+            {
+                _actorSurname = value;
+                OnPropertyChanged(nameof(ActorSurname));
+            }
+        }
 
         public Film SelectedFilm
         {
@@ -242,6 +281,18 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 _selectedFilm = value;
                 OnPropertyChanged(nameof(SelectedFilm));
+            }
+        }
+        public Actor SelectedActor
+        {
+            get
+            {
+                return _selectedActor;
+            }
+            set
+            {
+                _selectedActor = value;
+                OnPropertyChanged(nameof(SelectedActor));
             }
         }
 
