@@ -97,6 +97,8 @@ namespace WypozyczalniaFilmow.ViewModels
                     }
 
                     MessageBox.Show("Dane użytkownika zostały zaktualizowane", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+                    tmpEdit = false;
+                    SelectedUserLabel = "Dodaj Użytkownika";
                     ClearForm();
                 }
             }
@@ -204,7 +206,10 @@ namespace WypozyczalniaFilmow.ViewModels
 
         public Client SelectedUser
         {
-            get => _selectedUser;
+            get
+            {
+                return _selectedUser;
+            } 
             set
             {
                 _selectedUser = value;
@@ -225,7 +230,10 @@ namespace WypozyczalniaFilmow.ViewModels
         }
         public string SelectedUserLabel
         {
-            get => _selectedUserLabel;
+            get
+            {
+                return _selectedUserLabel;
+            }
             set
             {
                 _selectedUserLabel = value;

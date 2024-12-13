@@ -36,11 +36,8 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock 
-        Grid.Row="0"
-        Grid.ColumnSpan="2"
-        Text="{Binding FormTitle}"   
-        FontSize="24" />
+
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding SelectedFilmLabel}" FontSize="24"  HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
 
         <TextBlock
             Grid.Row="1" 
@@ -97,6 +94,7 @@
             Grid.Row="4" 
             Grid.Column="1" 
             Margin="0 3 3 0"
+            TextWrapping="Wrap" 
             Text="{Binding Description}" />
 
         <TextBlock 

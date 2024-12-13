@@ -14,6 +14,7 @@ using WypozyczalniaFilmow.Database;
 using WypozyczalniaFilmow.Helpers;
 using WypozyczalniaFilmow.Models;
 using WypozyczalniaFilmow.Views;
+using static Azure.Core.HttpHeader;
 
 namespace WypozyczalniaFilmow.ViewModels
 {
@@ -34,22 +35,82 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _formTitle = "Dodaj Film";
         private Film _selectedFilm = default!;
         private Actor _selectedActor = default!;
+        private string _selectedFilmLabel = "Dodaj Film";
+        private bool tmpEdit = false;
 
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
         public ICommand LoadImageCommand { get; }
         public ICommand DeleteFilmCommand { get; }
         public ICommand AddActorCommand { get; }
+        public ICommand EditFilmCommand { get; }
 
         public FilmViewModel()
         {
             LoadFilms();
             LoadActors();
-            SubmitCommand = new RelayCommand(AddFilms);
+            SubmitCommand = new RelayCommand(SubmitAction);
             CancelCommand = new RelayCommand(ClearForm);
             LoadImageCommand = new RelayCommand(LoadImage);
             DeleteFilmCommand = new RelayCommand(DeleteFilm);
             AddActorCommand = new RelayCommand(AddActorsToFilm);
+            EditFilmCommand = new RelayCommand(EditFilm);
+        }
+        private void SubmitAction()
+        {
+            if (tmpEdit)
+            {
+                EditFilm();
+            }
+            else
+            {
+                AddFilms();
+            }
+        }
+        private void EditFilm()
+        {
+            if (tmpEdit == false)
+            {
+                SelectedFilmLabel = "Edycja Filmu";
+                tmpEdit = true;
+            }
+            else
+            {
+                using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+                {
+                    if (SelectedFilm == null)
+                    {
+                        MessageBox.Show("Musisz wybrać film z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    // Wyszukiwanie filmu w bazie danych
+                    var selectedFilm = context.Films.FirstOrDefault(f => f.Id == SelectedFilm.Id);
+                    if (selectedFilm == null)
+                    {
+                        MessageBox.Show("Wybrany film nie istnieje w bazie danych!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    // Aktualizacja danych filmu
+                    selectedFilm.Title = this.Title;
+                    selectedFilm.Director = this.Director;
+                    selectedFilm.Description = this.Description;
+                    selectedFilm.Category = this.Category;
+                    selectedFilm.ReleaseDate = this.ReleaseDate;
+                    selectedFilm.Description = this.Description;
+                    selectedFilm.Count = this.Count;
+
+
+
+                    context.SaveChanges();
+                    var index = Films.IndexOf(SelectedFilm);
+                    Films[index] = selectedFilm; 
+                    ClearForm();
+                    tmpEdit = false;
+                    SelectedFilmLabel = "Dodaj Film";
+                }
+            }
         }
 
         private void LoadImage()
@@ -229,7 +290,6 @@ namespace WypozyczalniaFilmow.ViewModels
 
         }
 
-
         public string Title
         {
             get
@@ -360,6 +420,21 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 _selectedFilm = value;
                 OnPropertyChanged(nameof(SelectedFilm));
+
+                if (_selectedFilm != null)
+                {
+                    Title = _selectedFilm.Title;
+                    Director = _selectedFilm.Director;
+                    Category = _selectedFilm.Category;
+                    ReleaseDate = _selectedFilm.ReleaseDate;
+                    Description = _selectedFilm.Description;
+                    Cover = _selectedFilm.Cover;
+                    Count = _selectedFilm.Count;
+                }
+                else
+                {
+                    ClearForm();
+                }
             }
         }
         public Actor SelectedActor
@@ -372,6 +447,15 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 _selectedActor = value;
                 OnPropertyChanged(nameof(SelectedActor));
+            }
+        }
+        public string SelectedFilmLabel
+        {
+            get => _selectedFilmLabel;
+            set
+            {
+                _selectedFilmLabel = value;
+                OnPropertyChanged(nameof(SelectedFilmLabel));
             }
         }
 

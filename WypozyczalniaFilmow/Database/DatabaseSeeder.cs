@@ -36,8 +36,12 @@ namespace WypozyczalniaFilmow.Database
             {
                 var actors = _context.Persons.OfType<Actor>().ToList();
                 _context.Films.AddRange(
-                    new Film { Title = "Skazani na Shawshank", Actors = new List<Actor> { actors[0], actors[1] }, Count = 1 },
-                    new Film { Title = "W pustyni i w puszczy", Count = 1 }
+                    /*new Film { Title = "Skazani na Shawshank", Actors = new List<Actor> { actors[0], actors[1] }, Count = 1 },
+                    new Film { Title = "W pustyni i w puszczy", Count = 1 },*/
+                    new Film { Title = "Skazani na Shawshank", Actors = new List<Actor> { actors[0], actors[1] },Count = 1, Category = "Dramat", ReleaseDate = new DateOnly(1994, 9, 22), Description = "Film opowiada historię skazanych mężczyzn w amerykańskim więzieniu Shawshank."},
+                    new Film { Title = "W pustyni i w puszczy", Count = 1, Category = "Przygodowy", ReleaseDate = new DateOnly(2001, 12, 25), Description = "Film opowiada o przygodach dwójki dzieci w Afryce." },
+                    new Film { Title = "Incepcja", Actors = new List<Actor> { actors[0] }, Count = 3, Category = "Sci-Fi", ReleaseDate = new DateOnly(2010, 7, 16), Description = "Film o mężczyźnie, który potrafi wchodzić w sny innych ludzi i je kontrolować." },
+                    new Film { Title = "Matrix", Actors = new List<Actor> { actors[1] }, Count = 2, Category = "Sci-Fi", ReleaseDate = new DateOnly(1999, 3, 31), Description = "Film o człowieku, który odkrywa, że żyje w symulowanej rzeczywistości." }
                 );
                 _context.SaveChanges();
             }
