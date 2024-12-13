@@ -90,12 +90,15 @@ namespace WypozyczalniaFilmow.ViewModels
                     ReleaseDate = this.ReleaseDate,
                     Description = this.Description,
                     Cover = this.Cover,
-                    Count = this.Count
+                    Count = this.Count,
+                    Actors = new List<Actor>(NewActors)
                 };
 
                 context.Films.Add(newFilm);
                 context.SaveChanges();
                 Films.Add(newFilm);
+                ClearForm();
+                NewActors.Clear();
             }
         }
         private void DeleteFilm()
@@ -129,7 +132,7 @@ namespace WypozyczalniaFilmow.ViewModels
             }
         }
 
-        private void AddActorsToFilm()
+        private void AddActorsToFilm() // trzeba poprawic bo komunikaty źle się wyświeitlają(coś z ifami)
         {
             if(ActorName == string.Empty && ActorSurname == string.Empty && SelectedActor == null)
             {
@@ -167,6 +170,7 @@ namespace WypozyczalniaFilmow.ViewModels
             Description = string.Empty;
             Cover = string.Empty;
             Count = null;
+            NewActors.Clear();
 
         }
 
