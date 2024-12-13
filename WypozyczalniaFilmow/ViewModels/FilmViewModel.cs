@@ -287,6 +287,8 @@ namespace WypozyczalniaFilmow.ViewModels
             Cover = string.Empty;
             Count = null;
             NewActors.Clear();
+            _selectedFilm = null;
+
 
         }
 
