@@ -73,7 +73,8 @@ namespace WypozyczalniaFilmow.ViewModels
                     .ToList();
 
                 // Przypisanie do ObservableCollection
-                AllActors = new ObservableCollection<Actor>(actorsFromDb);
+                 AllActors = new ObservableCollection<Actor>(actorsFromDb);
+                
             }
         }
 
@@ -130,11 +131,30 @@ namespace WypozyczalniaFilmow.ViewModels
 
         private void AddActorsToFilm()
         {
-            if(ActorName == null && ActorSurname == null && SelectedActor == null)
+            if(ActorName == string.Empty && ActorSurname == string.Empty && SelectedActor == null)
+            {
+                MessageBox.Show("Musisz wybrać aktora do dodania", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            else if(ActorName == string.Empty && ActorSurname == string.Empty && SelectedActor != null)
+            {
+                NewActors.Add(SelectedActor);
+                SelectedActor = null;
+            }
+            else if(ActorName != string.Empty && ActorSurname != string.Empty && SelectedActor == null)
+            {
+                var newActor = new Actor { Name = ActorName, Surname = ActorSurname };
+                NewActors.Add(newActor);
+
+                ActorName = string.Empty;
+                ActorSurname = string.Empty;
+            }
+            else
             {
                 MessageBox.Show("Musisz wybrać aktora do dodania.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+
 
         }
 
