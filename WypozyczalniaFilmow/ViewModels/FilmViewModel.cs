@@ -20,8 +20,8 @@ namespace WypozyczalniaFilmow.ViewModels
     public class FilmViewModel : ObservableObject
     {
         public ObservableCollection<Film> Films { get; set; } = default!;
-        public ObservableCollection<Actor> NewActors { get; set; } = new ObservableCollection<Actor> { };
-        public ObservableCollection<Actor> AllActors { get; set; } = new ObservableCollection<Actor> { };
+        public ObservableCollection<Actor> NewActors { get; set; } = new ObservableCollection<Actor>();
+        public ObservableCollection<Actor> AllActors { get; set; } = new ObservableCollection<Actor>();
         private string _actorName = string.Empty;
         private string _actorSurname = string.Empty;
         private string _title = string.Empty;
@@ -70,6 +70,7 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 // Debugowanie liczby użytkowników
                 var actorsFromDb = context.Persons.OfType<Actor>()
+                    .Include(a=>a.Films)
                     .ToList();
 
                 // Przypisanie do ObservableCollection
