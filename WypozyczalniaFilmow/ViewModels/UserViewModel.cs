@@ -22,28 +22,97 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _name = string.Empty!;
         private string _surname = string.Empty!;
         private string _email = string.Empty!;
-        private string _phonenumber = string.Empty;
+        private int? _phonenumber;
+        private Client _selectedUser = default!;
+        private string _selectedUserLabel = "Dodaj Użytkownika";
+        private bool tmpEdit = false;
+
         public UserViewModel()
         {
             LoadUsers();
-            SubmitCommand = new RelayCommand(AddUser);
+            SubmitCommand = new RelayCommand(SubmitAction);
             CancelCommand = new RelayCommand(ClearForm);
             DeleteUserCommand = new RelayCommand(DeleteUser);
+            EditCommand = new RelayCommand(EditUser);
             ClearForm();
         }
 
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
         public ICommand DeleteUserCommand { get; }
+        public ICommand EditCommand { get; }
 
+        private void SubmitAction()
+        {
+            if (tmpEdit)
+            {
+                EditUser(); 
+            }
+            else
+            {
+                AddUser(); 
+            }
+        }
+
+        private void EditUser()
+        {
+            if (tmpEdit == false)
+            {
+                SelectedUserLabel = "Edycja Użytkownika";
+                tmpEdit = true;
+            }
+            else
+            {
+                using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+                {
+                    if (SelectedUser == null)
+                    {
+                        MessageBox.Show("Musisz wybrać użytkownika z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                    var userToUpdate = context.Clients.FirstOrDefault(u => u.Id == SelectedUser.Id);
+                    if (userToUpdate == null)
+                    {
+                        MessageBox.Show("Wybrany użytkownik nie istnieje w bazie danych!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    /*                var validationMessage = ValidateClient();
+                                    if (!string.IsNullOrEmpty(validationMessage))
+                                    {
+                                        MessageBox.Show(validationMessage, "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        return;
+                                    }*/
+
+                    userToUpdate.Name = Name;
+                    userToUpdate.Surname = Surname;
+                    userToUpdate.Email = Email;
+                    userToUpdate.PhoneNumber = PhoneNumber;
+                    context.SaveChanges();
+
+                    var index = Users.IndexOf(SelectedUser);
+                    if (index >= 0)
+                    {
+                        Users[index] = userToUpdate;
+                    }
+
+                    MessageBox.Show("Dane użytkownika zostały zaktualizowane", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+                    tmpEdit = false;
+                    SelectedUserLabel = "Dodaj Użytkownika";
+                    ClearForm();
+                }
+            }
+            
+        }
         private string ValidateClient()
         {
+            
             var client = new Client
             {
                 Name = this.Name,
                 Surname = this.Surname,
                 Email = this.Email,
-                PhoneNumber = int.Parse(this.PhoneNumber)
+                PhoneNumber = this.PhoneNumber
             };
 
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
@@ -63,8 +132,19 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                var usersFromDb = context.Persons.OfType<Client>().ToList();
-                usersFromDb.Remove(SelectedUser);
+                if (SelectedUser == null)
+                {
+                    MessageBox.Show("Musisz wybrać użytkownika z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                var selectedUser = context.Persons.FirstOrDefault(u => u.Id == SelectedUser.Id);
+                if (selectedUser == null)
+                {
+                    MessageBox.Show("Wybrany użytkownik nie istnieje w bazie danych!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                context.Persons.Remove(selectedUser);
                 context.SaveChanges();
                 Users.Remove(SelectedUser);
             }
@@ -85,7 +165,7 @@ namespace WypozyczalniaFilmow.ViewModels
                     Name = this.Name,
                     Surname = this.Surname,
                     Email = this.Email,
-                    PhoneNumber = int.Parse(this.PhoneNumber)
+                    PhoneNumber = this.PhoneNumber
                 };
 
                 context.Persons.Add(newUser);
@@ -109,22 +189,57 @@ namespace WypozyczalniaFilmow.ViewModels
             Name = string.Empty;
             Surname = string.Empty;
             Email = string.Empty;
-            PhoneNumber = string.Empty;
+            PhoneNumber = null;
         }
 
 
         //Gettery i Settery
-        private Client _selectedUser;
+        /*        public Client SelectedUser
+                {
+                    get => _selectedUser;
+                    set
+                    {
+                        _selectedUser = value;
+                        OnPropertyChanged(nameof(SelectedUser));
+                    }
+                }*/
+
         public Client SelectedUser
         {
-            get => _selectedUser;
+            get
+            {
+                return _selectedUser;
+            } 
             set
             {
                 _selectedUser = value;
                 OnPropertyChanged(nameof(SelectedUser));
+
+                if (_selectedUser != null)
+                {
+                    Name = _selectedUser.Name;
+                    Surname = _selectedUser.Surname;
+                    Email = _selectedUser.Email;
+                    PhoneNumber = _selectedUser.PhoneNumber;
+                }
+                else
+                {
+                    ClearForm();
+                }
             }
         }
-
+        public string SelectedUserLabel
+        {
+            get
+            {
+                return _selectedUserLabel;
+            }
+            set
+            {
+                _selectedUserLabel = value;
+                OnPropertyChanged(nameof(SelectedUserLabel));
+            }
+        }
         public string Name
         {
             get
@@ -161,7 +276,7 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Email));
             }
         }
-        public string PhoneNumber
+        public int? PhoneNumber
         {
             get
             {

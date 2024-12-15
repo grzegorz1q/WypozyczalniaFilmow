@@ -10,18 +10,72 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0">
-            <Label Content="{Binding Film.Title}"/>
+
+        <!-- Dane tekstowe w kolumnach -->
+        <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Padding="5">
+            <TextBlock Text="Tytuł:" FontWeight="Bold"/>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1" Padding="5">
+            <TextBlock Text="{Binding Film.Title}"/>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Padding="5">
+            <TextBlock Text="Reżyser:" FontWeight="Bold"/>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1" Padding="5">
+            <TextBlock Text="{Binding Film.Director}"/>
+        </Border>
+
+        <Border Grid.Row="2" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Padding="5">
+            <TextBlock Text="Kategoria:" FontWeight="Bold"/>
+        </Border>
+        <Border Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="1" Padding="5">
+            <TextBlock Text="{Binding Film.Category}"/>
+        </Border>
+
+        <Border Grid.Row="3" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Padding="5">
+            <TextBlock Text="Data premiery:" FontWeight="Bold"/>
+        </Border>
+        <Border Grid.Row="3" Grid.Column="1" BorderBrush="Black" BorderThickness="1" Padding="5">
+            <TextBlock Text="{Binding Film.ReleaseDate}"/>
+        </Border>
+
+        <Border Grid.Row="4" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Padding="5">
+            <TextBlock Text="Opis:" FontWeight="Bold"/>
+        </Border>
+        <Border Grid.Row="4" Grid.Column="1" BorderBrush="Black" BorderThickness="1" Padding="5">
+            <TextBlock Text="{Binding Film.Description}" TextWrapping="Wrap"/>
+        </Border>
+
+        <Grid Grid.Column="4" Grid.RowSpan="9" Grid.ColumnSpan="4">
+            <Image Style="{StaticResource FixedSizeImage}" Source="{Binding Film.Cover}" Margin="0,0,0,10"/>
         </Grid>
-        <Grid Grid.Column="0" Grid.Row="1">
-            <ListView ItemsSource="{Binding Film.Actors}">
+
+
+        <Grid Grid.Column="0" Grid.Row="6" Grid.RowSpan="3" Grid.ColumnSpan="3">
+            <ListView ItemsSource="{Binding Film.Actors}" Margin="20 0 0 20">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -31,9 +85,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </Grid>
-        <Grid Grid.Column="1" Grid.RowSpan="2">
-            <Image Style="{StaticResource FixedSizeImage}" Source="{Binding Film.Cover}" Margin="0,0,0,10"/>
         </Grid>
     </Grid>
 </Page>

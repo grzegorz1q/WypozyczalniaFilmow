@@ -10,7 +10,7 @@ namespace WypozyczalniaFilmow.Models
     public class Client : Person
     {
         public string Email { get; set; }
-        public int PhoneNumber { get; set; }
+        public int? PhoneNumber { get; set; }
         public virtual ICollection<Rent> Rents { get; set; }
     }
 }

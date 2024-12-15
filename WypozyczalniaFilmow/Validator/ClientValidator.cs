@@ -30,6 +30,7 @@ namespace WypozyczalniaFilmow.Validators
                 .MaximumLength(50).WithMessage("Nazwisko nie może przekraczać 50 znaków.");
 
             RuleFor(x => x.PhoneNumber)
+                .NotEmpty().WithMessage("Numer telefonu jest wymagany.")
                 .GreaterThan(0).WithMessage("Numer telefonu musi być dodatnią liczbą.")
                 .LessThan(999999999).WithMessage("Numer telefonu nie może mieć więcej niż 9 cyfr.")
                 .Custom((value, context) =>
