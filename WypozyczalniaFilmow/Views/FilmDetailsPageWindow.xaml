@@ -75,7 +75,7 @@
 
 
         <Grid Grid.Column="0" Grid.Row="6" Grid.RowSpan="3" Grid.ColumnSpan="3">
-            <ListView ItemsSource="{Binding Film.Actors}">
+            <ListView ItemsSource="{Binding Film.Actors}" Margin="20 0 0 20">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
