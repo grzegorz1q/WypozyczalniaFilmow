@@ -31,7 +31,6 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _description = string.Empty;
         private string _cover = string.Empty;
         private int? _count;
-        private string _formTitle = "Dodaj Film";
         private Film _selectedFilm = default!;
         private Actor _selectedActor = default!;
         private string _selectedFilmLabel = "Dodaj Film";
@@ -57,14 +56,15 @@ namespace WypozyczalniaFilmow.ViewModels
         }
         private void SubmitAction()
         {
-            if (tmpEdit)
+            /*if (tmpEdit)
             {
                 EditFilm();
             }
             else
             {
                 AddFilms();
-            }
+            }*/
+            AddOrUpdateFilm();
         }
         private void EditFilm()
         {
@@ -72,10 +72,17 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 SelectedFilmLabel = "Edycja Filmu";
                 tmpEdit = true;
+                Title = SelectedFilm.Title;
+                Director = SelectedFilm.Director;
+                Category = SelectedFilm.Category;
+                ReleaseDate = SelectedFilm.ReleaseDate;
+                Description = SelectedFilm.Description;
+                Cover = SelectedFilm.Cover;
+                Count = SelectedFilm.Count;
             }
             else
             {
-                using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
+                /*using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
                 {
                     if (SelectedFilm == null)
                     {
@@ -83,7 +90,6 @@ namespace WypozyczalniaFilmow.ViewModels
                         return;
                     }
 
-                    // Wyszukiwanie filmu w bazie danych
                     var selectedFilm = context.Films.FirstOrDefault(f => f.Id == SelectedFilm.Id);
                     if (selectedFilm == null)
                     {
@@ -91,7 +97,6 @@ namespace WypozyczalniaFilmow.ViewModels
                         return;
                     }
 
-                    // Aktualizacja danych filmu
                     selectedFilm.Title = this.Title;
                     selectedFilm.Director = this.Director;
                     selectedFilm.Description = this.Description;
@@ -104,11 +109,11 @@ namespace WypozyczalniaFilmow.ViewModels
 
                     context.SaveChanges();
                     var index = Films.IndexOf(SelectedFilm);
-                    Films[index] = selectedFilm; 
+                    Films[index] = selectedFilm; */
                     ClearForm();
                     tmpEdit = false;
                     SelectedFilmLabel = "Dodaj Film";
-                }
+               // }
             }
         }
 
@@ -128,93 +133,80 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                // Debugowanie liczby użytkowników
                 var actorsFromDb = context.Persons.OfType<Actor>()
                     .ToList();
 
-                // Przypisanie do ObservableCollection
                  AllActors = new ObservableCollection<Actor>(actorsFromDb);
                 
             }
         }
 
-        private void AddFilms()
+        private void AddOrUpdateFilm()
         {
-            /* using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
-             {
-                 var newFilm = new Film
-                 {
-                     Title = this.Title,
-                     Director = this.Director,
-                     Category = this.Category,
-                     ReleaseDate = this.ReleaseDate,
-                     Description = this.Description,
-                     Cover = this.Cover,
-                     Count = this.Count,
-                     Actors = NewActors
-                 };
-
-
-                 context.Films.Add(newFilm);
-                 context.SaveChanges();
-                 Films.Add(newFilm);
-                 ClearForm();
-                 NewActors.Clear();
-             }*/
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                // Lista aktorów do dodania do filmu
                 var filmActors = new List<Actor>();
 
                 foreach (var actor in NewActors)
                 {
-                    // Sprawdź, czy aktor już istnieje w bazie
                     var existingActor = context.Actors
                         .FirstOrDefault(a => a.Name == actor.Name && a.Surname == actor.Surname);
 
                     if (existingActor != null)
                     {
-                        // Dodaj istniejącego aktora
                         filmActors.Add(existingActor);
                     }
                     else
                     {
-                        // Dodaj nowego aktora
                         filmActors.Add(actor);
                         context.Actors.Add(actor);
                     }
                 }
-
-                // Utwórz nowy film z aktorami
-                var newFilm = new Film
+                if (tmpEdit == false)
                 {
-                    Title = this.Title,
-                    Director = this.Director,
-                    Category = this.Category,
-                    ReleaseDate = this.ReleaseDate,
-                    Description = this.Description,
-                    Cover = this.Cover,
-                    Count = this.Count,
-                    Actors = filmActors
-                };
+                    var newFilm = new Film
+                    {
+                        Title = this.Title,
+                        Director = this.Director,
+                        Category = this.Category,
+                        ReleaseDate = this.ReleaseDate,
+                        Description = this.Description,
+                        Cover = this.Cover,
+                        Count = this.Count,
+                        Actors = filmActors
+                    };
+                
+                    context.Films.Add(newFilm);
+                    context.SaveChanges();
+                    Films.Add(newFilm);
+                }
+                else
+                {
+                    var selectedFilm = context.Films.FirstOrDefault(f => f.Id == SelectedFilm.Id);
+                    selectedFilm.Title = this.Title;
+                    selectedFilm.Director = this.Director;
+                    selectedFilm.Description = this.Description;
+                    selectedFilm.Category = this.Category;
+                    selectedFilm.ReleaseDate = this.ReleaseDate;
+                    selectedFilm.Description = this.Description;
+                    selectedFilm.Count = this.Count;
+                    selectedFilm.Actors = filmActors;
+                    context.Films.Update(selectedFilm);
+                    context.SaveChanges();
+                    var index = Films.IndexOf(SelectedFilm);
+                    Films[index] = selectedFilm;
+                    tmpEdit = false;
+                }
 
-                // Dodaj film do bazy
-                context.Films.Add(newFilm);
-                context.SaveChanges();
-
-                // Dodaj film do kolekcji
-                Films.Add(newFilm);
-
-                // Wyczyść formularz
                 ClearForm();
                 NewActors.Clear();
             }
+ 
         }
         private void DeleteFilm()
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                // Debugowanie liczby użytkowników
                 if (SelectedFilm == null)
                 {
                     MessageBox.Show("Musisz wybrać użytkownika z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -236,13 +228,11 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                // Debugowanie liczby użytkowników
                 var filmsFromDb = context.Films
                     //.Include(f => f.Actors)
                     .ToList();
                 Console.WriteLine($"Liczba użytkowników w bazie: {filmsFromDb.Count}");
 
-                // Przypisanie do ObservableCollection
                 Films = new ObservableCollection<Film>(filmsFromDb);
             }
         }
@@ -287,8 +277,8 @@ namespace WypozyczalniaFilmow.ViewModels
             Count = null;
             NewActors.Clear();
             _selectedFilm = null;
-
-
+            SelectedFilmLabel = "Dodaj film";
+            tmpEdit = false;
         }
 
         public string Title
@@ -375,18 +365,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Count));
             }
         }
-        public string FormTitle
-        {
-            get
-            {
-                return _formTitle;
-            }
-            set
-            {
-                _formTitle = value;
-                OnPropertyChanged(nameof(FormTitle));
-            }
-        }
         public string ActorName
         {
             get
@@ -421,21 +399,6 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 _selectedFilm = value;
                 OnPropertyChanged(nameof(SelectedFilm));
-
-                if (_selectedFilm != null)
-                {
-                    Title = _selectedFilm.Title;
-                    Director = _selectedFilm.Director;
-                    Category = _selectedFilm.Category;
-                    ReleaseDate = _selectedFilm.ReleaseDate;
-                    Description = _selectedFilm.Description;
-                    Cover = _selectedFilm.Cover;
-                    Count = _selectedFilm.Count;
-                }
-                else
-                {
-                    ClearForm();
-                }
             }
         }
         public Actor SelectedActor
