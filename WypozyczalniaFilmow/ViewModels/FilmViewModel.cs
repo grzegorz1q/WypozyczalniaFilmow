@@ -196,6 +196,7 @@ namespace WypozyczalniaFilmow.ViewModels
                     var index = Films.IndexOf(SelectedFilm);
                     Films[index] = selectedFilm;
                     tmpEdit = false;
+                    MessageBox.Show("Dane filmu zostały zaktualizowane", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
                 ClearForm();

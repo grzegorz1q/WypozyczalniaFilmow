@@ -156,17 +156,18 @@ namespace WypozyczalniaFilmow.ViewModels
         }
         private void AddOrUpdateUser()
         {
-            var validationMessage = ValidateClient();
-            if (!string.IsNullOrEmpty(validationMessage))
-            {
-                MessageBox.Show(validationMessage, "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+
 
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
                 if (tmpEdit == false)
                 {
+                    var validationMessage = ValidateClient();
+                    if (!string.IsNullOrEmpty(validationMessage))
+                    {
+                        MessageBox.Show(validationMessage, "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
                     var newUser = new Client
                     {
                         Name = this.Name,
@@ -192,6 +193,8 @@ namespace WypozyczalniaFilmow.ViewModels
 
                     var index = Users.IndexOf(SelectedUser);
                     Users[index] = userToUpdate;
+                    tmpEdit = false;
+                    MessageBox.Show("Dane użytkownika zostały zaktualizowane", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
