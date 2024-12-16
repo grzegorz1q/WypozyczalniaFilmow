@@ -6,6 +6,14 @@
              xmlns:local="clr-namespace:WypozyczalniaFilmow.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </UserControl.Resources>
+
     <Grid Margin="5 0 0 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -31,12 +39,11 @@
         </Grid.RowDefinitions>
 
 
-        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding SelectedFilmLabel}" FontSize="24"  HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding SelectedFilmLabel}" FontSize="24" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <TextBlock
             Grid.Row="1" 
             Grid.Column="0"
-            HorizontalAlignment="Left"
             Text="Tytuł"/>
 
         <TextBox 
@@ -48,7 +55,6 @@
         <TextBlock 
             Grid.Row="1" 
             Grid.Column="1" 
-            HorizontalAlignment="Left"
             Text="Reżyser"/>
 
         <TextBox 
@@ -56,11 +62,10 @@
             Grid.Column="1" 
             Margin="0 3 3 0"
             Text="{Binding Director}" />
-    
+
         <TextBlock
             Grid.Row="1" 
             Grid.Column="2"
-            HorizontalAlignment="Left"
             Text="Kategoria"/>
         <TextBox 
             Grid.Row="2" 
@@ -71,18 +76,17 @@
         <TextBlock 
             Grid.Row="1" 
             Grid.Column="4" 
-            HorizontalAlignment="Left"
             Text="Data premiery"/>
-        <TextBox 
+        <TextBox
             Grid.Row="2" 
             Grid.Column="4" 
             Margin="0 3 3 0"
-            Text="{Binding ReleaseDate}" />
+            Text="{Binding ReleaseDate}"
+            />
 
         <TextBlock
             Grid.Row="3" 
             Grid.Column="2"
-            HorizontalAlignment="Left"
             Text="Opis"/>
         <TextBox 
             Grid.Row="4" 
@@ -99,35 +103,33 @@
             Width="100"
             Margin="5 0 0 0 "
             Text="Okładka"/>
+        
         <Button 
-                Grid.Row="2" 
-                Grid.Column="5" 
+            Grid.Row="2" 
+            Grid.Column="5" 
             Margin="0 3 3 0"
-                Content="Dodaj okładkę" 
-                Command="{Binding LoadImageCommand}" />
+            Content="Dodaj okładkę" 
+            Command="{Binding LoadImageCommand}" />
 
         <TextBlock 
             Grid.Row="1" 
             Grid.Column="3" 
-            HorizontalAlignment="Left"
             Text="Ilość"/>
         <TextBox 
             Grid.Row="2"
             Grid.Column="3"
             Margin="0 3 3 0"
             Text="{Binding Count}" />
-        
+
         <TextBlock 
             Grid.Row="5" 
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            HorizontalAlignment="Left"
             FontSize="16"
             Text="Nowi aktorzy"/>
         <TextBlock 
             Grid.Row="6" 
             Grid.Column="0"
-            HorizontalAlignment="Left"
             Text="Imię"/>
         <TextBox 
             Grid.Row="7"
@@ -137,7 +139,6 @@
         <TextBlock 
             Grid.Row="6" 
             Grid.Column="1"
-            HorizontalAlignment="Left"
             Text="Nazwisko"/>
         <TextBox 
             Grid.Row="7"
@@ -154,19 +155,18 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Grid.Row="7" Grid.RowSpan="2" Grid.Column="3" Margin="3 3 3 0" Content="Dodaj aktora" Command="{Binding AddActorCommand}" />
-        <ListView Grid.Row="7" Grid.RowSpan="4" Grid.Column="4" Grid.ColumnSpan="2" ItemsSource="{Binding NewActors}">
-            <ListView.ItemTemplate>
+        <Button Grid.Row="7" Grid.RowSpan="2" Grid.Column="2" Margin="3 3 3 0" Content="Dodaj aktora" Command="{Binding AddActorCommand}" />
+        <ItemsControl Grid.Row="7" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" ItemsSource="{Binding NewActors}">
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text="{Binding Surname}" />
+                        <TextBlock Text="{Binding Surname}"/>
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-        <Button Grid.Row="10" Grid.Column="0" Margin="0 3 3 0" Style="{StaticResource SuccessButton}" Command="{Binding SubmitCommand}" Content="Dodaj"/>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Button Grid.Row="10" Grid.Column="0" Margin="0 3 3 0" Style="{StaticResource SuccessButton}" Command="{Binding SubmitCommand}" Content="Zatwierdź" Height="38" VerticalAlignment="Top"/>
         <Button Grid.Row="10" Grid.Column="1" Margin="0 3 3 0" Style="{StaticResource DangerButton}" Command="{Binding CancelCommand}" Content="Anuluj"/>
     </Grid>
 </UserControl>

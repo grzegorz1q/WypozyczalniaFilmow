@@ -68,6 +68,7 @@ namespace WypozyczalniaFilmow.Database
                 .WithMany(r => r.Rents)
                 .HasForeignKey(f => f.FilmId)
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }
