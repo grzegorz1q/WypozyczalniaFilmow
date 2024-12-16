@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WypozyczalniaFilmow.Views"
         mc:Ignorable="d"
         Title="Wypożyczalnia filmów" Height="640" Width="1024">
-    <Grid>
+    <Grid Background="DarkCyan">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120" />
             <ColumnDefinition Width="*" />
