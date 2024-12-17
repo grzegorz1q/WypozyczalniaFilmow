@@ -93,6 +93,7 @@ namespace WypozyczalniaFilmow.ViewModels
                     userToUpdate.Surname = Surname;
                     userToUpdate.Email = Email;
                     userToUpdate.PhoneNumber = PhoneNumber;
+                    context.Persons.Update(userToUpdate);
                     context.SaveChanges();
 
                     var index = Users.IndexOf(SelectedUser);

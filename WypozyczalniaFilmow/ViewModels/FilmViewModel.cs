@@ -109,7 +109,7 @@ namespace WypozyczalniaFilmow.ViewModels
                     selectedFilm.Count = this.Count;
 
 
-
+                    context.Films.Update(selectedFilm);
                     context.SaveChanges();
                     var index = Films.IndexOf(SelectedFilm);
                     Films[index] = selectedFilm; 
