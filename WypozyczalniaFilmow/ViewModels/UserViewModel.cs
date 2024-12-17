@@ -187,13 +187,13 @@ namespace WypozyczalniaFilmow.ViewModels
                 }
                 else
                 {
-                    var userToUpdate = context.Clients.FirstOrDefault(u => u.Id == SelectedUser.Id);
+                    var userToUpdate = context.Persons.OfType<Client>().FirstOrDefault(u => u.Id == SelectedUser.Id);
                     userToUpdate.Name = Name;
                     userToUpdate.Surname = Surname;
                     userToUpdate.Email = Email;
                     userToUpdate.PhoneNumber = PhoneNumber;
 
-                    context.Clients.Update(userToUpdate);
+                    context.Persons.Update(userToUpdate);
                     context.SaveChanges();
 
                     var index = Users.IndexOf(SelectedUser);
