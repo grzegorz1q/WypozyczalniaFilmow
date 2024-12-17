@@ -77,6 +77,13 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 SelectedFilmLabel = "Edycja Filmu";
                 tmpEdit = true;
+                Title = _selectedFilm.Title;
+                Director = _selectedFilm.Director;
+                Category = _selectedFilm.Category;
+                ReleaseDate = _selectedFilm.ReleaseDate;
+                Description = _selectedFilm.Description;
+                Cover = _selectedFilm.Cover;
+                Count = _selectedFilm.Count;
             }
             else
             {
@@ -423,20 +430,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 _selectedFilm = value;
                 OnPropertyChanged(nameof(SelectedFilm));
 
-                if (_selectedFilm != null)
-                {
-                    Title = _selectedFilm.Title;
-                    Director = _selectedFilm.Director;
-                    Category = _selectedFilm.Category;
-                    ReleaseDate = _selectedFilm.ReleaseDate;
-                    Description = _selectedFilm.Description;
-                    Cover = _selectedFilm.Cover;
-                    Count = _selectedFilm.Count;
-                }
-                else
-                {
-                    ClearForm();
-                }
             }
         }
         public Actor SelectedActor

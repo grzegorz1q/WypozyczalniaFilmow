@@ -65,6 +65,10 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 SelectedUserLabel = "Edycja Użytkownika";
                 tmpEdit = true;
+                Name = _selectedUser.Name;
+                Surname = _selectedUser.Surname;
+                Email = _selectedUser.Email;
+                PhoneNumber = _selectedUser.PhoneNumber;
             }
             else
             {
@@ -216,17 +220,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 _selectedUser = value;
                 OnPropertyChanged(nameof(SelectedUser));
 
-                if (_selectedUser != null)
-                {
-                    Name = _selectedUser.Name;
-                    Surname = _selectedUser.Surname;
-                    Email = _selectedUser.Email;
-                    PhoneNumber = _selectedUser.PhoneNumber;
-                }
-                else
-                {
-                    ClearForm();
-                }
             }
         }
         public string SelectedUserLabel
