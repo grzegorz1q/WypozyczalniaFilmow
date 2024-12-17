@@ -189,8 +189,8 @@ namespace WypozyczalniaFilmow.ViewModels
                 {
                     var selectedFilm = context.Films.FirstOrDefault(f => f.Id == SelectedFilm.Id);
                     selectedFilm.Title = this.Title;
+                    selectedFilm.Cover = this.Cover;
                     selectedFilm.Director = this.Director;
-                    selectedFilm.Description = this.Description;
                     selectedFilm.Category = this.Category;
                     selectedFilm.ReleaseDate = this.ReleaseDate;
                     selectedFilm.Description = this.Description;
@@ -282,7 +282,7 @@ namespace WypozyczalniaFilmow.ViewModels
             Cover = string.Empty;
             Count = null;
             NewActors.Clear();
-            _selectedFilm = null;
+            SelectedFilm = null;
             SelectedFilmLabel = "Dodaj film";
             tmpEdit = false;
         }

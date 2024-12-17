@@ -222,6 +222,7 @@ namespace WypozyczalniaFilmow.ViewModels
             PhoneNumber = null;
             SelectedUserLabel = "Dodaj użytkownika";
             tmpEdit = false;
+            SelectedUser = null;
         }
 
 
