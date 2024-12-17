@@ -12,12 +12,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Menu boczne -->
         <StackPanel Background="#23262B"
                     Grid.Column="0"
                     Orientation="Vertical">
-
-            <!-- Logo -->
 
             <Menu Background="Transparent"
                   Margin="0 40 0 0">
@@ -28,28 +25,24 @@
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
 
-                <!-- Home -->
                 <MenuItem Header="Strona Główna" Foreground="white" Command="{Binding NavigateToHomePageCommand}">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/Styles/Assets/img_home.png" Stretch="Uniform"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <!-- Użytkownicy -->
                 <MenuItem Header="Użytkownicy" Foreground="white" Command="{Binding NavigateToUserPageCommand}">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/Styles/Assets/img_artist.png" Stretch="Uniform"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <!-- Filmy -->
                 <MenuItem Header="Filmy" Foreground="white" Command="{Binding NavigateToFilmPageCommand}">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/Styles/Assets/img_movies.png" Stretch="Uniform"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <!-- Wypożyczenia -->
                 <MenuItem Header="Wypożyczenia" Foreground="white" Command="{Binding NavigateToRentPageCommand}">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/Styles/Assets/img_history.png" Stretch="Uniform"/>

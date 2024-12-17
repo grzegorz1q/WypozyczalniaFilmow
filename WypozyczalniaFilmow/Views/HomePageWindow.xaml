@@ -11,12 +11,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <!-- Główna zawartość -->
             <RowDefinition Height="Auto"/>
-            <!-- Strzałki -->
         </Grid.RowDefinitions>
 
-        <!-- Lista filmów -->
         <ScrollViewer x:Name="FilmScrollViewer" 
                       Grid.Row="0" 
                       HorizontalScrollBarVisibility="Hidden" 
@@ -45,7 +42,6 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <!-- Strzałki do przesuwania -->
         <Grid Grid.Row="1" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

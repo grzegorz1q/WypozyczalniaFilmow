@@ -21,10 +21,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-
-
         <Label Grid.Row="0" Content="{Binding SelectedUserLabel}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -35,30 +32,11 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock
-                Grid.Row="0" 
-                Grid.Column="0"
-                Width="100"
-                Text="Imię"/>
+            <TextBlock Grid.Row="0"  Grid.Column="0" Width="100" Text="Imię"/>
+            <TextBox Grid.Row="1" Grid.Column="0" Margin="0 5 0 0 " Text="{Binding Name}" />
 
-            <TextBox 
-                Grid.Row="1" 
-                Grid.Column="0" 
-                Margin="0 5 0 0 "
-                Text="{Binding Name}" />
-
-            <TextBlock
-                Grid.Row="0" 
-                Grid.Column="1" 
-                Width="100"
-                Margin="5 0 0 0 "
-                Text="Nazwisko"/>
-
-            <TextBox 
-                Grid.Row="1" 
-                Grid.Column="1" 
-                Margin="5 5 0 0 "
-                Text="{Binding Surname}" />
+            <TextBlock Grid.Row="0"  Grid.Column="1"  Width="100" Margin="5 0 0 0 " Text="Nazwisko"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5 5 0 0 " Text="{Binding Surname}" />
 
         </Grid>
 
@@ -72,30 +50,11 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock
-                Grid.Row="0" 
-                Grid.Column="0"
-                Width="100"
-                Text="Email"/>
+            <TextBlock Grid.Row="0"  Grid.Column="0" Width="100" Text="Email"/>
+            <TextBox Grid.Row="1" Grid.Column="0" Margin="0 5 0 0 " Text="{Binding Email}" />
 
-            <TextBox 
-                Grid.Row="1" 
-                Grid.Column="0" 
-                Margin="0 5 0 0 "
-                Text="{Binding Email}" />
-
-            <TextBlock 
-                Grid.Row="0" 
-                Grid.Column="1" 
-                Width="100"
-                Margin="5 0 0 0 "
-                Text="Numer telefonu"/>
-
-            <TextBox 
-                Grid.Row="1" 
-                Grid.Column="1" 
-                Margin="5 5 0 0 "
-                Text="{Binding PhoneNumber}" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Width="100" Margin="5 0 0 0 " Text="Numer telefonu"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5 5 0 0 " Text="{Binding PhoneNumber}" />
 
         </Grid>
 

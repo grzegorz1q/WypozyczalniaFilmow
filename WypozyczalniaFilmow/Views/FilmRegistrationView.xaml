@@ -41,110 +41,25 @@
 
         <Label Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding SelectedFilmLabel}" FontSize="24" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <TextBlock
-            Grid.Row="1" 
-            Grid.Column="0"
-            Text="Tytuł"/>
-
-        <TextBox 
-            Grid.Row="2" 
-            Grid.Column="0"
-            Margin="0 3 3 0"
-            Text="{Binding Title}" />
-
-        <TextBlock 
-            Grid.Row="1" 
-            Grid.Column="1" 
-            Text="Reżyser"/>
-
-        <TextBox 
-            Grid.Row="2" 
-            Grid.Column="1" 
-            Margin="0 3 3 0"
-            Text="{Binding Director}" />
-
-        <TextBlock
-            Grid.Row="1" 
-            Grid.Column="2"
-            Text="Kategoria"/>
-        <TextBox 
-            Grid.Row="2" 
-            Grid.Column="2" 
-            Margin="0 3 3 0"
-            Text="{Binding Category}" />
-
-        <TextBlock 
-            Grid.Row="1" 
-            Grid.Column="4" 
-            Text="Data premiery"/>
-        <TextBox
-            Grid.Row="2" 
-            Grid.Column="4" 
-            Margin="0 3 3 0"
-            Text="{Binding ReleaseDate}"
-            />
-
-        <TextBlock
-            Grid.Row="3" 
-            Grid.Column="2"
-            Text="Opis"/>
-        <TextBox 
-            Grid.Row="4" 
-            Grid.Column="2"
-            Grid.RowSpan="2"
-            Grid.ColumnSpan="4"
-            Margin="0 3 3 0"
-            TextWrapping="Wrap" 
-            Text="{Binding Description}" />
-
-        <TextBlock 
-            Grid.Row="1" 
-            Grid.Column="5" 
-            Width="100"
-            Margin="5 0 0 0 "
-            Text="Okładka"/>
-        
-        <Button 
-            Grid.Row="2" 
-            Grid.Column="5" 
-            Margin="0 3 3 0"
-            Content="Dodaj okładkę" 
-            Command="{Binding LoadImageCommand}" />
-
-        <TextBlock 
-            Grid.Row="1" 
-            Grid.Column="3" 
-            Text="Ilość"/>
-        <TextBox 
-            Grid.Row="2"
-            Grid.Column="3"
-            Margin="0 3 3 0"
-            Text="{Binding Count}" />
-
-        <TextBlock 
-            Grid.Row="5" 
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            FontSize="16"
-            Text="Nowi aktorzy"/>
-        <TextBlock 
-            Grid.Row="6" 
-            Grid.Column="0"
-            Text="Imię"/>
-        <TextBox 
-            Grid.Row="7"
-            Grid.Column="0"
-            Margin="0 3 3 0"
-            Text="{Binding ActorName}" />
-        <TextBlock 
-            Grid.Row="6" 
-            Grid.Column="1"
-            Text="Nazwisko"/>
-        <TextBox 
-            Grid.Row="7"
-            Grid.Column="1"
-            Margin="0 3 3 0"
-            Text="{Binding ActorSurname}" />
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Tytuł"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Margin="0 3 3 0" Text="{Binding Title}" />
+        <TextBlock Grid.Row="1"  Grid.Column="1" Text="Reżyser"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0 3 3 0" Text="{Binding Director}" />
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="Kategoria"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Margin="0 3 3 0" Text="{Binding Category}" />
+        <TextBlock Grid.Row="1" Grid.Column="4" Text="Data premiery"/>
+        <TextBox Grid.Row="2" Grid.Column="4" Margin="0 3 3 0" Text="{Binding ReleaseDate}"/>
+        <TextBlock Grid.Row="3" Grid.Column="2" Text="Opis"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="4" Margin="0 3 3 0" TextWrapping="Wrap" Text="{Binding Description}" />
+        <TextBlock Grid.Row="1" Grid.Column="5" Width="100" Margin="5 0 0 0 " Text="Okładka"/>
+        <Button Grid.Row="2" Grid.Column="5" Margin="0 3 3 0" Content="Dodaj okładkę" Command="{Binding LoadImageCommand}" />
+        <TextBlock Grid.Row="1" Grid.Column="3" Text="Ilość"/>
+        <TextBox Grid.Row="2" Grid.Column="3" Margin="0 3 3 0" Text="{Binding Count}" />
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" Text="Nowi aktorzy"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Imię"/>
+        <TextBox Grid.Row="7" Grid.Column="0" Margin="0 3 3 0" Text="{Binding ActorName}" />
+        <TextBlock  Grid.Row="6" Grid.Column="1" Text="Nazwisko"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Margin="0 3 3 0" Text="{Binding ActorSurname}" />
         <ComboBox Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ComboBoxActors" ItemsSource="{Binding AllActors}" SelectedItem="{Binding SelectedActor}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
