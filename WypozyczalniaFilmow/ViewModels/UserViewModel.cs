@@ -44,14 +44,6 @@ namespace WypozyczalniaFilmow.ViewModels
 
         private void SubmitAction()
         {
-            /*if (tmpEdit)
-            {
-                EditUser(); 
-            }
-            else
-            {
-                AddUser(); 
-            }*/
             AddOrUpdateUser();
         }
 
