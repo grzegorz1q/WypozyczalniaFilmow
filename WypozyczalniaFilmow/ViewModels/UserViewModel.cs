@@ -93,14 +93,12 @@ namespace WypozyczalniaFilmow.ViewModels
                     userToUpdate.Surname = Surname;
                     userToUpdate.Email = Email;
                     userToUpdate.PhoneNumber = PhoneNumber;
+
                     context.Persons.Update(userToUpdate);
                     context.SaveChanges();
 
                     var index = Users.IndexOf(SelectedUser);
-                    if (index >= 0)
-                    {
-                        Users[index] = userToUpdate;
-                    }
+                    Users[index] = userToUpdate;
 
                     MessageBox.Show("Dane użytkownika zostały zaktualizowane", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
                     tmpEdit = false;

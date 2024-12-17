@@ -89,9 +89,6 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
                 {
-                    
-
-                    // Wyszukiwanie filmu w bazie danych
                     var selectedFilm = context.Films.FirstOrDefault(f => f.Id == SelectedFilm.Id);
                     if (selectedFilm == null)
                     {
@@ -99,7 +96,6 @@ namespace WypozyczalniaFilmow.ViewModels
                         return;
                     }
 
-                    // Aktualizacja danych filmu
                     selectedFilm.Title = this.Title;
                     selectedFilm.Director = this.Director;
                     selectedFilm.Description = this.Description;
@@ -108,11 +104,11 @@ namespace WypozyczalniaFilmow.ViewModels
                     selectedFilm.Description = this.Description;
                     selectedFilm.Count = this.Count;
 
-
                     context.Films.Update(selectedFilm);
                     context.SaveChanges();
                     var index = Films.IndexOf(SelectedFilm);
-                    Films[index] = selectedFilm; 
+                    Films[index] = selectedFilm;
+                    MessageBox.Show("Dane filmu zostały zaktualizowane", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
                     ClearForm();
                     tmpEdit = false;
                     SelectedFilmLabel = "Dodaj Film";
