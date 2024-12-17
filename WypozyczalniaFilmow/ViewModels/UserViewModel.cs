@@ -73,44 +73,9 @@ namespace WypozyczalniaFilmow.ViewModels
             }
             else
             {
-                /*using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
-                {
-                    if (SelectedUser == null)
-                    {
-                        MessageBox.Show("Musisz wybrać użytkownika z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
-                    var userToUpdate = context.Clients.FirstOrDefault(u => u.Id == SelectedUser.Id);
-                    if (userToUpdate == null)
-                    {
-                        MessageBox.Show("Wybrany użytkownik nie istnieje w bazie danych!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
-
-                    *//*                var validationMessage = ValidateClient();
-                                    if (!string.IsNullOrEmpty(validationMessage))
-                                    {
-                                        MessageBox.Show(validationMessage, "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                        return;
-                                    }*//*
-
-                    userToUpdate.Name = Name;
-                    userToUpdate.Surname = Surname;
-                    userToUpdate.Email = Email;
-                    userToUpdate.PhoneNumber = PhoneNumber;
-                    context.SaveChanges();
-
-                    var index = Users.IndexOf(SelectedUser);
-                    if (index >= 0)
-                    {
-                        Users[index] = userToUpdate;
-                    }
-
-                    MessageBox.Show("Dane użytkownika zostały zaktualizowane", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);*/
                 tmpEdit = false;
                 SelectedUserLabel = "Dodaj Użytkownika";
                 ClearForm();
-                //}
             }
 
         }
@@ -226,16 +191,7 @@ namespace WypozyczalniaFilmow.ViewModels
         }
 
 
-        //Gettery i Settery
-        /*        public Client SelectedUser
-                {
-                    get => _selectedUser;
-                    set
-                    {
-                        _selectedUser = value;
-                        OnPropertyChanged(nameof(SelectedUser));
-                    }
-                }*/
+        //Gettery i settery
 
         public Client SelectedUser
         {
@@ -247,18 +203,6 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 _selectedUser = value;
                 OnPropertyChanged(nameof(SelectedUser));
-
-                /*if (_selectedUser != null)
-                {
-                    Name = _selectedUser.Name;
-                    Surname = _selectedUser.Surname;
-                    Email = _selectedUser.Email;
-                    PhoneNumber = _selectedUser.PhoneNumber;
-                }
-                else
-                {
-                    ClearForm();
-                }*/
             }
         }
         public string SelectedUserLabel

@@ -56,14 +56,6 @@ namespace WypozyczalniaFilmow.ViewModels
         }
         private void SubmitAction()
         {
-            /*if (tmpEdit)
-            {
-                EditFilm();
-            }
-            else
-            {
-                AddFilms();
-            }*/
             AddOrUpdateFilm();
         }
         private void EditFilm()
@@ -87,38 +79,9 @@ namespace WypozyczalniaFilmow.ViewModels
             }
             else
             {
-                /*using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
-                {
-                    if (SelectedFilm == null)
-                    {
-                        MessageBox.Show("Musisz wybrać film z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
-
-                    var selectedFilm = context.Films.FirstOrDefault(f => f.Id == SelectedFilm.Id);
-                    if (selectedFilm == null)
-                    {
-                        MessageBox.Show("Wybrany film nie istnieje w bazie danych!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
-
-                    selectedFilm.Title = this.Title;
-                    selectedFilm.Director = this.Director;
-                    selectedFilm.Description = this.Description;
-                    selectedFilm.Category = this.Category;
-                    selectedFilm.ReleaseDate = this.ReleaseDate;
-                    selectedFilm.Description = this.Description;
-                    selectedFilm.Count = this.Count;
-
-
-
-                    context.SaveChanges();
-                    var index = Films.IndexOf(SelectedFilm);
-                    Films[index] = selectedFilm; */
                     ClearForm();
                     tmpEdit = false;
                     SelectedFilmLabel = "Dodaj Film";
-               // }
             }
         }
 
@@ -243,7 +206,7 @@ namespace WypozyczalniaFilmow.ViewModels
             }
         }
 
-        private void AddActorsToFilm() // trzeba poprawic bo komunikaty źle się wyświeitlają(coś z ifami)
+        private void AddActorsToFilm()
         {
             if(ActorName == string.Empty && ActorSurname == string.Empty && SelectedActor == null)
             {
