@@ -51,6 +51,7 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             if (tmpEdit == false)
             {
+
                 if (SelectedUser == null)
                 {
                     MessageBox.Show("Musisz wybrać użytkownika z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
