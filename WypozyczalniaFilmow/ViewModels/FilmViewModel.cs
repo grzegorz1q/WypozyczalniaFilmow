@@ -31,7 +31,6 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _description = string.Empty;
         private string _cover = string.Empty;
         private int? _count;
-        private string _formTitle = "Dodaj Film";
         private Film _selectedFilm = default!;
         private Actor _selectedActor = default!;
         private string _selectedFilmLabel = "Dodaj Film";
@@ -57,66 +56,32 @@ namespace WypozyczalniaFilmow.ViewModels
         }
         private void SubmitAction()
         {
-            if (tmpEdit)
-            {
-                EditFilm();
-            }
-            else
-            {
-                AddFilms();
-            }
+            AddOrUpdateFilm();
         }
         private void EditFilm()
         {
-            if (SelectedFilm == null)
-            {
-                MessageBox.Show("Musisz wybrać film z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
             if (tmpEdit == false)
             {
+                if (SelectedFilm == null)
+                {
+                    MessageBox.Show("Musisz wybrać film z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
                 SelectedFilmLabel = "Edycja Filmu";
                 tmpEdit = true;
-                Title = _selectedFilm.Title;
-                Director = _selectedFilm.Director;
-                Category = _selectedFilm.Category;
-                ReleaseDate = _selectedFilm.ReleaseDate;
-                Description = _selectedFilm.Description;
-                Cover = _selectedFilm.Cover;
-                Count = _selectedFilm.Count;
+                Title = SelectedFilm.Title;
+                Director = SelectedFilm.Director;
+                Category = SelectedFilm.Category;
+                ReleaseDate = SelectedFilm.ReleaseDate;
+                Description = SelectedFilm.Description;
+                Cover = SelectedFilm.Cover;
+                Count = SelectedFilm.Count;
             }
             else
             {
-                using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
-                {
-                    
-
-                    // Wyszukiwanie filmu w bazie danych
-                    var selectedFilm = context.Films.FirstOrDefault(f => f.Id == SelectedFilm.Id);
-                    if (selectedFilm == null)
-                    {
-                        MessageBox.Show("Wybrany film nie istnieje w bazie danych!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
-
-                    // Aktualizacja danych filmu
-                    selectedFilm.Title = this.Title;
-                    selectedFilm.Director = this.Director;
-                    selectedFilm.Description = this.Description;
-                    selectedFilm.Category = this.Category;
-                    selectedFilm.ReleaseDate = this.ReleaseDate;
-                    selectedFilm.Description = this.Description;
-                    selectedFilm.Count = this.Count;
-
-
-                    context.Films.Update(selectedFilm);
-                    context.SaveChanges();
-                    var index = Films.IndexOf(SelectedFilm);
-                    Films[index] = selectedFilm; 
                     ClearForm();
                     tmpEdit = false;
                     SelectedFilmLabel = "Dodaj Film";
-                }
             }
         }
 
@@ -136,93 +101,81 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                // Debugowanie liczby użytkowników
                 var actorsFromDb = context.Persons.OfType<Actor>()
                     .ToList();
 
-                // Przypisanie do ObservableCollection
                  AllActors = new ObservableCollection<Actor>(actorsFromDb);
                 
             }
         }
 
-        private void AddFilms()
+        private void AddOrUpdateFilm()
         {
-            /* using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
-             {
-                 var newFilm = new Film
-                 {
-                     Title = this.Title,
-                     Director = this.Director,
-                     Category = this.Category,
-                     ReleaseDate = this.ReleaseDate,
-                     Description = this.Description,
-                     Cover = this.Cover,
-                     Count = this.Count,
-                     Actors = NewActors
-                 };
-
-
-                 context.Films.Add(newFilm);
-                 context.SaveChanges();
-                 Films.Add(newFilm);
-                 ClearForm();
-                 NewActors.Clear();
-             }*/
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                // Lista aktorów do dodania do filmu
                 var filmActors = new List<Actor>();
 
                 foreach (var actor in NewActors)
                 {
-                    // Sprawdź, czy aktor już istnieje w bazie
                     var existingActor = context.Actors
                         .FirstOrDefault(a => a.Name == actor.Name && a.Surname == actor.Surname);
 
                     if (existingActor != null)
                     {
-                        // Dodaj istniejącego aktora
                         filmActors.Add(existingActor);
                     }
                     else
                     {
-                        // Dodaj nowego aktora
                         filmActors.Add(actor);
                         context.Actors.Add(actor);
                     }
                 }
-
-                // Utwórz nowy film z aktorami
-                var newFilm = new Film
+                if (tmpEdit == false)
                 {
-                    Title = this.Title,
-                    Director = this.Director,
-                    Category = this.Category,
-                    ReleaseDate = this.ReleaseDate,
-                    Description = this.Description,
-                    Cover = this.Cover,
-                    Count = this.Count,
-                    Actors = filmActors
-                };
+                    var newFilm = new Film
+                    {
+                        Title = this.Title,
+                        Director = this.Director,
+                        Category = this.Category,
+                        ReleaseDate = this.ReleaseDate,
+                        Description = this.Description,
+                        Cover = this.Cover,
+                        Count = this.Count,
+                        Actors = filmActors
+                    };
+                
+                    context.Films.Add(newFilm);
+                    context.SaveChanges();
+                    Films.Add(newFilm);
+                }
+                else
+                {
+                    var selectedFilm = context.Films.FirstOrDefault(f => f.Id == SelectedFilm.Id);
+                    selectedFilm.Title = this.Title;
+                    selectedFilm.Cover = this.Cover;
+                    selectedFilm.Director = this.Director;
+                    selectedFilm.Category = this.Category;
+                    selectedFilm.ReleaseDate = this.ReleaseDate;
+                    selectedFilm.Description = this.Description;
+                    selectedFilm.Count = this.Count;
+                    selectedFilm.Actors = filmActors;
+                    context.Films.Update(selectedFilm);
+                    context.SaveChanges();
+                    var index = Films.IndexOf(SelectedFilm);
+                    Films[index] = selectedFilm;
+                    tmpEdit = false;
+                    MessageBox.Show("Dane filmu zostały zaktualizowane", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
 
-                // Dodaj film do bazy
-                context.Films.Add(newFilm);
-                context.SaveChanges();
-
-                // Dodaj film do kolekcji
-                Films.Add(newFilm);
-
-                // Wyczyść formularz
                 ClearForm();
                 NewActors.Clear();
             }
+ 
         }
         private void DeleteFilm()
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                // Debugowanie liczby użytkowników
                 if (SelectedFilm == null)
                 {
                     MessageBox.Show("Musisz wybrać użytkownika z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -244,18 +197,16 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
-                // Debugowanie liczby użytkowników
                 var filmsFromDb = context.Films
                     //.Include(f => f.Actors)
                     .ToList();
                 Console.WriteLine($"Liczba użytkowników w bazie: {filmsFromDb.Count}");
 
-                // Przypisanie do ObservableCollection
                 Films = new ObservableCollection<Film>(filmsFromDb);
             }
         }
 
-        private void AddActorsToFilm() // trzeba poprawic bo komunikaty źle się wyświeitlają(coś z ifami)
+        private void AddActorsToFilm()
         {
             if(ActorName == string.Empty && ActorSurname == string.Empty && SelectedActor == null)
             {
@@ -294,9 +245,9 @@ namespace WypozyczalniaFilmow.ViewModels
             Cover = string.Empty;
             Count = null;
             NewActors.Clear();
-            _selectedFilm = null;
-
-
+            SelectedFilm = null;
+            SelectedFilmLabel = "Dodaj film";
+            tmpEdit = false;
         }
 
         public string Title
@@ -383,18 +334,6 @@ namespace WypozyczalniaFilmow.ViewModels
                 OnPropertyChanged(nameof(Count));
             }
         }
-        public string FormTitle
-        {
-            get
-            {
-                return _formTitle;
-            }
-            set
-            {
-                _formTitle = value;
-                OnPropertyChanged(nameof(FormTitle));
-            }
-        }
         public string ActorName
         {
             get
@@ -429,7 +368,6 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 _selectedFilm = value;
                 OnPropertyChanged(nameof(SelectedFilm));
-
             }
         }
         public Actor SelectedActor

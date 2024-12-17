@@ -12,7 +12,6 @@ namespace WypozyczalniaFilmow.Database
     public class AppDbContext : DbContext
     {
         public virtual DbSet<Actor> Actors { get; set; }
-        public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Film> Films { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Rent> Rents { get; set; }
