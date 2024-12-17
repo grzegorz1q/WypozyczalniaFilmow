@@ -8,9 +8,9 @@ namespace WypozyczalniaFilmow.Database
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            // optionsBuilder.UseSqlite("Data Source=WypozyczalniaFilmow123.db");
+            optionsBuilder.UseSqlite("Data Source=WypozyczalniaFilmow123.db");
             //optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=WypozyczalniaFilmow;Trusted_Connection=True;TrustServerCertificate=True;");
-            optionsBuilder.UseInMemoryDatabase("InMemoryDb");
+           // optionsBuilder.UseInMemoryDatabase("InMemoryDb");
             return new AppDbContext(optionsBuilder.Options);
         }
     }

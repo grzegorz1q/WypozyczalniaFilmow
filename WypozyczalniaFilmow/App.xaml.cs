@@ -17,6 +17,7 @@ namespace WypozyczalniaFilmow
             base.OnStartup(e);
             using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
             {
+                context.Database.Migrate();
                 var seeder = new DatabaseSeeder(context);
                 seeder.Seed(); // Dodajemy dane do bazy
             }
