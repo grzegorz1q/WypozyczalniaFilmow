@@ -43,7 +43,6 @@
                   AlternatingRowBackground="AntiqueWhite"
                   RowBackground="White">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="2*"/>
                 <DataGridTextColumn Header="Imię" Binding="{Binding Name}" Width="2*"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" Width="2*"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="2*"/>

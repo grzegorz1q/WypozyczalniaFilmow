@@ -166,6 +166,7 @@ namespace WypozyczalniaFilmow.ViewModels
                     tmpEdit = false;
                     MessageBox.Show("Dane użytkownika zostały zaktualizowane", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                ClearForm();
             }
         }
         private void LoadUsers()
