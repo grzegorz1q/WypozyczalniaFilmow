@@ -69,6 +69,11 @@ namespace WypozyczalniaFilmow.ViewModels
         }
         private void EditFilm()
         {
+            if (SelectedFilm == null)
+            {
+                MessageBox.Show("Musisz wybrać film z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             if (tmpEdit == false)
             {
                 SelectedFilmLabel = "Edycja Filmu";
@@ -78,11 +83,7 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
                 {
-                    if (SelectedFilm == null)
-                    {
-                        MessageBox.Show("Musisz wybrać film z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
+                    
 
                     // Wyszukiwanie filmu w bazie danych
                     var selectedFilm = context.Films.FirstOrDefault(f => f.Id == SelectedFilm.Id);

@@ -56,6 +56,11 @@ namespace WypozyczalniaFilmow.ViewModels
 
         private void EditUser()
         {
+            if (SelectedUser == null)
+            {
+                MessageBox.Show("Musisz wybrać użytkownika z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             if (tmpEdit == false)
             {
                 SelectedUserLabel = "Edycja Użytkownika";
@@ -65,11 +70,7 @@ namespace WypozyczalniaFilmow.ViewModels
             {
                 using (var context = new DesignTimeDbContextFactory().CreateDbContext(null))
                 {
-                    if (SelectedUser == null)
-                    {
-                        MessageBox.Show("Musisz wybrać użytkownika z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
+                  
                     var userToUpdate = context.Clients.FirstOrDefault(u => u.Id == SelectedUser.Id);
                     if (userToUpdate == null)
                     {
