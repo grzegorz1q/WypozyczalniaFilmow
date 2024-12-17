@@ -14,7 +14,6 @@ using WypozyczalniaFilmow.Database;
 using WypozyczalniaFilmow.Helpers;
 using WypozyczalniaFilmow.Models;
 using WypozyczalniaFilmow.Views;
-using static Azure.Core.HttpHeader;
 
 namespace WypozyczalniaFilmow.ViewModels
 {
@@ -28,7 +27,7 @@ namespace WypozyczalniaFilmow.ViewModels
         private string _title = string.Empty;
         private string _director = string.Empty;
         private string _category = string.Empty;
-        private DateOnly _releasedate = default!;
+        private DateOnly _releasedate;
         private string _description = string.Empty;
         private string _cover = string.Empty;
         private int? _count;
