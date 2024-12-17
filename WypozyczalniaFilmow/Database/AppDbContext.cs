@@ -15,15 +15,8 @@ namespace WypozyczalniaFilmow.Database
         public virtual DbSet<Film> Films { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Rent> Rents { get; set; }
-       // public virtual DbSet<ActorFilm> ActorFilms { get; set; }
-
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-  /*      protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlite("Data Source=WypozyczalniaFilmow.db");
-        }
-*/
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Person>()
@@ -33,26 +26,10 @@ namespace WypozyczalniaFilmow.Database
                 .HasValue<Client>((int)Role.Client)
                 .HasValue<Actor>((int)Role.Actor);
 
-            /*modelBuilder.Entity<ActorFilm>()
-                .HasKey(d => new { d.FilmId, d.ActorId });
-
-            modelBuilder.Entity<ActorFilm>()
-                .HasOne(f => f.Film)
-                .WithMany(af => af.ActorFilms)
-                .HasForeignKey(f => f.FilmId);
-
-            modelBuilder.Entity<ActorFilm>()
-                .HasOne(a => a.Actor)
-                .WithMany(af => af.ActorFilms)
-                .HasForeignKey(a => a.ActorId)
-                .OnDelete(DeleteBehavior.Restrict);*/
 
             modelBuilder.Entity<Actor>()
                 .HasMany(f => f.Films)
                 .WithMany(a => a.Actors);
-           /* modelBuilder.Entity<Film>()
-                .HasMany(a => a.Actors)
-                .WithMany(f => f.Films);*/
 
             modelBuilder.Entity<Rent>()
                 .HasKey(d => new { d.ClientId, d.FilmId });
