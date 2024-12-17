@@ -70,6 +70,11 @@ namespace WypozyczalniaFilmow.ViewModels
         {
             if (tmpEdit == false)
             {
+                if (SelectedFilm == null)
+                {
+                    MessageBox.Show("Musisz wybrać film z listy", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
                 SelectedFilmLabel = "Edycja Filmu";
                 tmpEdit = true;
                 Title = SelectedFilm.Title;
