@@ -30,7 +30,7 @@ namespace WypozyczalniaFilmow.ViewModels
             ScrollLeftCommand = new RelayCommand(ScrollLeft);
             ScrollRightCommand = new RelayCommand(ScrollRight);
             NavigateToFilmDetailsCommand = new RelayCommand(NavigateToFilmDetailsPage);
-            GetFilm(0, 3);
+            GetFilm(0, 4);
         }
         private void NavigateToFilmDetailsPage(object parameter)
         {
@@ -69,7 +69,7 @@ namespace WypozyczalniaFilmow.ViewModels
             }
         }
         int startIndex = 0;
-        int endIndex = 3;
+        int endIndex = 4;
         private void ScrollLeft()
         {
             if (FilmViewModel.Films.Any())
