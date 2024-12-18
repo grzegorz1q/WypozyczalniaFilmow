@@ -33,7 +33,7 @@
                                                 CommandParameter="{Binding}" />
                             </Border.InputBindings>
                             <StackPanel Orientation="Vertical" Width="150">
-                                <Image Style="{StaticResource FixedSizeImage}" Source="{Binding Cover}" Height="200" Stretch="UniformToFill" Margin="0,0,0,10"/>
+                                <Image Source="{Binding Cover}" Height="200" Stretch="Uniform" Margin="0,0,0,10"/>
                                 <TextBlock Text="{Binding Title}" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Border>

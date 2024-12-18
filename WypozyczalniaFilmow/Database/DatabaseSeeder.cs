@@ -27,7 +27,13 @@ namespace WypozyczalniaFilmow.Database
                     new Client { Name = "Jan", Surname = "Kowalski", Email = "jan@jan.pl", PhoneNumber = 123456789 },
                     new Client { Name = "Kamila", Surname = "Nowak", Email = "kamila@nowak.pl", PhoneNumber = 123321432 },
                     new Actor { Name = "Tim", Surname = "Robbins" },
-                    new Actor { Name= "Morgan", Surname = "Freeman"}
+                    new Actor { Name= "Morgan", Surname = "Freeman"},
+                    new Actor { Name= "Leonardo", Surname = "DiCaprio"},
+                    new Actor { Name= "Elliot", Surname = "Page"},
+                    new Actor { Name= "Keanu", Surname = "Reeves"},
+                    new Actor { Name= "Laurence", Surname = "Fishburne"},
+                    new Actor { Name= "Adam", Surname = "Fidusiewicz" },
+                    new Actor { Name= "Karolina", Surname = "Sawka" }
                 );
 
                 _context.SaveChanges(); // Zapisujemy zmiany w bazie
@@ -38,10 +44,10 @@ namespace WypozyczalniaFilmow.Database
                 _context.Films.AddRange(
                     /*new Film { Title = "Skazani na Shawshank", Actors = new List<Actor> { actors[0], actors[1] }, Count = 1 },
                     new Film { Title = "W pustyni i w puszczy", Count = 1 },*/
-                    new Film { Title = "Skazani na Shawshank", Actors = new List<Actor> { actors[0], actors[1] },Count = 1, Category = "Dramat", ReleaseDate = new DateOnly(1994, 9, 22), Description = "Film opowiada historię skazanych mężczyzn w amerykańskim więzieniu Shawshank."},
-                    new Film { Title = "W pustyni i w puszczy", Count = 1, Category = "Przygodowy", ReleaseDate = new DateOnly(2001, 12, 25), Description = "Film opowiada o przygodach dwójki dzieci w Afryce." },
-                    new Film { Title = "Incepcja", Actors = new List<Actor> { actors[0] }, Count = 3, Category = "Sci-Fi", ReleaseDate = new DateOnly(2010, 7, 16), Description = "Film o mężczyźnie, który potrafi wchodzić w sny innych ludzi i je kontrolować." },
-                    new Film { Title = "Matrix", Actors = new List<Actor> { actors[1] }, Count = 2, Category = "Sci-Fi", ReleaseDate = new DateOnly(1999, 3, 31), Description = "Film o człowieku, który odkrywa, że żyje w symulowanej rzeczywistości." }
+                    new Film { Title = "Skazani na Shawshank", Actors = new List<Actor> { actors[0], actors[1] },Count = 1, Category = "Dramat", ReleaseDate = new DateOnly(1994, 9, 22), Description = "Film opowiada historię skazanych mężczyzn w amerykańskim więzieniu Shawshank.", Cover = "/Covers/shawshank.jpg" },
+                    new Film { Title = "W pustyni i w puszczy", Actors = new List<Actor> { actors[2], actors[3] }, Count = 1, Category = "Przygodowy", ReleaseDate = new DateOnly(2001, 12, 25), Description = "Film opowiada o przygodach dwójki dzieci w Afryce.", Cover = "/Covers/pustynia.jpg" },
+                    new Film { Title = "Incepcja", Actors = new List<Actor> { actors[2], actors[3] }, Count = 3, Category = "Sci-Fi", ReleaseDate = new DateOnly(2010, 7, 16), Description = "Film o mężczyźnie, który potrafi wchodzić w sny innych ludzi i je kontrolować.", Cover = "/Covers/incepcja.jpg" },
+                    new Film { Title = "Matrix", Actors = new List<Actor> { actors[4], actors[5] }, Count = 2, Category = "Sci-Fi", ReleaseDate = new DateOnly(1999, 3, 31), Description = "Film o człowieku, który odkrywa, że żyje w symulowanej rzeczywistości.", Cover = "/Covers/matrix.jpg" }
                 );
                 _context.SaveChanges();
             }

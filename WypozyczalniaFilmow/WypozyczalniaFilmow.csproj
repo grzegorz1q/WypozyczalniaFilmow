@@ -51,6 +51,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+	<ItemGroup>
+		<Content Include="Covers\**\*" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
 
   <ItemGroup>
     <Page Update="Views\MainWindow.xaml">
