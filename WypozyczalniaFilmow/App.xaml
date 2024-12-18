@@ -48,7 +48,6 @@
             <Setter Property="Width" Value="300"/>
             <Setter Property="Height" Value="500"/>
             <Setter Property="Stretch" Value="UniformToFill"/>
-            <!-- Zapewnia, że obraz wypełnia cały obszar, ale nie jest zniekształcony -->
         </Style>
 
         <Style TargetType="TextBlock">
@@ -75,7 +74,5 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
-        
     </Application.Resources>
 </Application>
