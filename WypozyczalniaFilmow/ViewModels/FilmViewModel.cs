@@ -79,9 +79,9 @@ namespace WypozyczalniaFilmow.ViewModels
             }
             else
             {
-                    ClearForm();
-                    tmpEdit = false;
-                    SelectedFilmLabel = "Dodaj Film";
+                ClearForm();
+                tmpEdit = false;
+                SelectedFilmLabel = "Dodaj Film";
             }
         }
 
@@ -166,11 +166,9 @@ namespace WypozyczalniaFilmow.ViewModels
                     tmpEdit = false;
                     MessageBox.Show("Dane filmu zostały zaktualizowane", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-
                 ClearForm();
                 NewActors.Clear();
             }
- 
         }
         private void DeleteFilm()
         {
