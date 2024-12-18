@@ -72,7 +72,7 @@ namespace WypozyczalniaFilmow.ViewModels
         int endIndex = 4;
         private void ScrollLeft()
         {
-            if (FilmViewModel.Films.Any())
+            if (FilmViewModel.Films.Any() && startIndex>0 )
             {
                 startIndex--;
                 endIndex--;
